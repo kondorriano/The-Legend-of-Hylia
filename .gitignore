@@ -1,0 +1,28 @@
+############
+## Windows
+############
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+#############
+## Unity
+#############
+
+#Unity3D ignores
+
+Hylia/[Ll]ibrary/
+Hylia/[Tt]emp/
+Hylia/[Oo]bj/
+
+*.tmproj
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.pidb
+*.userprefs
