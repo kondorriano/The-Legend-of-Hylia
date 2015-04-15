@@ -1,0 +1,286 @@
+fileFormatVersion: 2
+guid: d7bcd98a8ab9bdc4da9bfdd4feecadeb
+timeCreated: 1428760921
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Custom Edited - Legend of Zelda Series - Link-Alpha_0
+    21300002: Custom Edited - Legend of Zelda Series - Link-Alpha_1
+    21300004: Custom Edited - Legend of Zelda Series - Link-Alpha_2
+    21300006: Custom Edited - Legend of Zelda Series - Link-Alpha_3
+    21300008: Custom Edited - Legend of Zelda Series - Link-Alpha_4
+    21300010: Custom Edited - Legend of Zelda Series - Link-Alpha_5
+    21300012: Custom Edited - Legend of Zelda Series - Link-Alpha_6
+    21300014: Custom Edited - Legend of Zelda Series - Link-Alpha_7
+    21300016: Custom Edited - Legend of Zelda Series - Link-Alpha_8
+    21300018: Custom Edited - Legend of Zelda Series - Link-Alpha_9
+    21300020: Custom Edited - Legend of Zelda Series - Link-Alpha_10
+    21300022: Custom Edited - Legend of Zelda Series - Link-Alpha_11
+    21300024: Custom Edited - Legend of Zelda Series - Link-Alpha_12
+    21300026: Custom Edited - Legend of Zelda Series - Link-Alpha_13
+    21300028: Custom Edited - Legend of Zelda Series - Link-Alpha_14
+    21300030: Custom Edited - Legend of Zelda Series - Link-Alpha_15
+    21300032: Custom Edited - Legend of Zelda Series - Link-Alpha_16
+    21300034: Custom Edited - Legend of Zelda Series - Link-Alpha_17
+    21300036: Custom Edited - Legend of Zelda Series - Link-Alpha_18
+    21300038: Custom Edited - Legend of Zelda Series - Link-Alpha_19
+    21300040: Custom Edited - Legend of Zelda Series - Link-Alpha_20
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -2
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_0
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 81
+        width: 16
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_1
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 81
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_2
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 81
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_3
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 81
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_4
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 81
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_5
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 81
+        width: 16
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_6
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 81
+        width: 18
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_7
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 42
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_8
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 42
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_9
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 42
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_10
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 42
+        width: 18
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_11
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 42
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_12
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 42
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_13
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 42
+        width: 18
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_14
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 3
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_15
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 3
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_16
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 3
+        width: 20
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_17
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 3
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_18
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 3
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_19
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 3
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Custom Edited - Legend of Zelda Series - Link-Alpha_20
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 3
+        width: 28
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
