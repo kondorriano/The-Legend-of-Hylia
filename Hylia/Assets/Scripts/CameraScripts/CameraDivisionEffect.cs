@@ -31,7 +31,6 @@ public class CameraDivisionEffect : MonoBehaviour {
 		camTex2 = new RenderTexture (Screen.width, Screen.height, 32);
 		camera2.GetComponent<Camera> ().targetTexture = camTex2;
 		screenSize = new Vector2(Screen.width, Screen.height);
-		Debug.Log ("hello");
 	}
 
 	void Update () {
@@ -180,5 +179,9 @@ public class CameraDivisionEffect : MonoBehaviour {
 
 			Graphics.Blit(src, dest, material);
 		}
+	}
+
+	public bool getRenderMainCamera() {
+		return renderMainCamera && !move1 && !move2;
 	}
 }

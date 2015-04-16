@@ -11,7 +11,7 @@ public class Movement : MonoBehaviour {
 	}
 
 	public float speed = 10f;
-	private string id;
+	private int id;
 	bool movingLastFrame = false;
 	Animator anim;
 	Rigidbody2D myRigidbody;
@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour {
 	Vector3 walkDirection = Vector3.zero;
 
 
-	void setId(string myId) {
+	void setId(int myId) {
 		id = myId;
 	}
 

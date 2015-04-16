@@ -4,10 +4,10 @@ using System.Collections;
 public class TestItem : MonoBehaviour {
 	public GameObject prefab;
 	Movement mov;
-	private string id;
+	private int id;
 
 
-	void setId(string myId) {
+	void setId(int myId) {
 		id = myId;
 	}
 

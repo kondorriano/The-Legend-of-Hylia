@@ -13,10 +13,10 @@ public class MenuNavigation : MonoBehaviour {
 	Transform[] items;
 	Animator anim;
 	AudioSource audio;
-	private string id;
+	private int id;
 
 
-	void setId(string myId) {
+	void setId(int myId) {
 		id = myId;
 	}
 
@@ -44,8 +44,6 @@ public class MenuNavigation : MonoBehaviour {
 		if (active) {
 			float xAxis = Input.GetAxis ("360_HorPAD"+id);
 			float yAxis = Input.GetAxis ("360_VerPAD"+id);
-
-			Debug.Log(xAxis + " " + yAxis);
 
 			int sum = 0;
 			if(yAxis == 1) {
