@@ -380,7 +380,7 @@ public class DynamicLight : MonoBehaviour {
 		
 		for (int i = 0; i < allVertices.Count; i++) { 
 			//Debug.Log(allVertices[i].angle);
-			initVerticesMeshLight [i+1] = new Vector3(allVertices[i].pos.x, allVertices[i].pos.y, transform.position.z);
+			initVerticesMeshLight [i+1] = new Vector3(allVertices[i].pos.x, allVertices[i].pos.y, 0);
 			
 			//if(allVertices[i].endpoint == true)
 			//Debug.Log(allVertices[i].angle);
