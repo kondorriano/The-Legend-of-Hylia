@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MenuControl : MonoBehaviour {
+public class MenusControl : MonoBehaviour {
 
 	public AudioClip popUpShare;
 
@@ -46,14 +46,10 @@ public class MenuControl : MonoBehaviour {
 		float x = otherPlayer.position.x - player.position.x;
 
 		if (cam.getRenderMainCamera ()) {
-			if(x > 0) isRight = true;
-			else isRight = false;
-
-			if((otherPlayer.position-player.position).sqrMagnitude <= 50) activeShare = true;
-		} else {
-			if(x > 0) isRight = false;
-			else isRight = true;
+			if((otherPlayer.position-player.position).sqrMagnitude <= 10) activeShare = true;
 		}
+		if(x > 0) isRight = false;
+		else isRight = true;
 
 		if (!previousActiveShare && activeShare && anim.GetBool("Active")) {
 			audio.Stop();
@@ -66,5 +62,9 @@ public class MenuControl : MonoBehaviour {
 		animShare.SetBool ("Active", activeShare);
 
 
+	}
+
+	public bool isActiveShare() {
+		return previousActiveShare;
 	}
 }

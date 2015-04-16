@@ -86,4 +86,17 @@ public class MenuNavigation : MonoBehaviour {
 		}
 		anim.SetBool ("Active", active);
 	}
+
+	public bool isActive() {
+		return active;
+	}
+
+	public Sprite getItemSelected() {
+
+		return (active) ? items[itemSelectedIndex].GetComponent<Image>().sprite : null;
+	}
+
+	public void setItemSelected(Sprite spr) {		
+		items[itemSelectedIndex].GetComponent<Image>().sprite = spr;
+	}
 }
