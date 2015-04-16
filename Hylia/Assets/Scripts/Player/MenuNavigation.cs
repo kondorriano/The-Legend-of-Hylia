@@ -72,14 +72,17 @@ public class MenuNavigation : MonoBehaviour {
 				items[itemSelectedIndex].GetComponent<Image>().color = Color.white;
 
 				audio.Stop();
+				audio.volume = 1;
 				audio.clip = moveCursor;
 				audio.Play();
 			}
 		}
 
 		if (Input.GetButtonDown ("360_Start"+id)) {
-			audio.Stop();
 			active = !active;
+
+			audio.Stop();
+			audio.volume = 1;
 			audio.clip = (active) ? popUp : popOut;
 			audio.Play();
 

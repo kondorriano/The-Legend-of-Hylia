@@ -53,6 +53,7 @@ public class MenusControl : MonoBehaviour {
 
 		if (!previousActiveShare && activeShare && anim.GetBool("Active")) {
 			audio.Stop();
+			audio.volume = 0.5f;
 			audio.clip = popUpShare;
 			audio.Play();
 		}

@@ -45,6 +45,7 @@ public class MenuShareNavigation : MonoBehaviour {
 				otherMenu.setItemSelected(myItem.sprite);
 
 				audio.Stop();
+				audio.volume = 1;
 				audio.clip = share;
 				audio.Play();
 			}
