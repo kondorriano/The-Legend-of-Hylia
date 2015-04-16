@@ -8,7 +8,7 @@ public class verts
 {
 	public float angle {get;set;}
 	public int location {get;set;} // 1= left end point    0= middle     -1=right endpoint
-	public Vector3 pos {get;set;}
+	public Vector2 pos {get;set;}
 	public bool endpoint { get; set;}
 
 }
@@ -109,51 +109,53 @@ public class DynamicLight : MonoBehaviour {
 				
 				verts v = new verts();
 				// Convert to world space
-				Vector3 worldPoint = mf.transform.TransformPoint(mf.points[i]);
+				Vector2 worldPoint = mf.transform.TransformPoint(mf.points[i]);
 
 
+				if((worldPoint-(Vector2) transform.position).magnitude <= lightRadius) {
+					Vector2 origen = transform.position;
+					// Reforma fecha 24/09/2014 (ultimo argumento lighradius X worldPoint.magnitude (expensivo pero preciso))
+					RaycastHit2D ray = Physics2D.Raycast(origen, (worldPoint - origen).normalized, (worldPoint - origen).magnitude);
 
-				// Reforma fecha 24/09/2014 (ultimo argumento lighradius X worldPoint.magnitude (expensivo pero preciso))
-				RaycastHit2D ray = Physics2D.Raycast(transform.position, worldPoint - transform.position, (worldPoint - transform.position).magnitude);
 
-
-				if(ray){
-					v.pos = ray.point;
-					if( worldPoint.sqrMagnitude >= (ray.point.sqrMagnitude - magRange) && worldPoint.sqrMagnitude <= (ray.point.sqrMagnitude + magRange) )
+					if(ray){
+						v.pos = ray.point;
+						if( worldPoint.sqrMagnitude >= (ray.point.sqrMagnitude - magRange) && worldPoint.sqrMagnitude <= (ray.point.sqrMagnitude + magRange) )
+							v.endpoint = true;
+							
+					}else{
+						v.pos = worldPoint;
 						v.endpoint = true;
-						
-				}else{
-					v.pos =  worldPoint;
-					v.endpoint = true;
-				}
+					}
 
-				Debug.DrawLine(transform.position, v.pos, Color.white);	
+					Debug.DrawLine(transform.position, new Vector3(v.pos.x,v.pos.y, transform.position.z), Color.white);	
 
-				//--Convert To local space for build mesh (mesh craft only in local vertex)
-				v.pos = transform.InverseTransformPoint(v.pos); 
-				//--Calculate angle
-				v.angle = getVectorAngle(true,v.pos.x, v.pos.y);
-			
-
-
-				// -- bookmark if an angle is lower than 0 or higher than 2f --//
-				//-- helper method for fix bug on shape located in 2 or more quadrants
-				if(v.angle < 0f )
-					lows = true;
-				
-				if(v.angle > 2f)
-					his = true;
+					//--Convert To local space for build mesh (mesh craft only in local vertex)
+					v.pos = transform.InverseTransformPoint(v.pos); 
+					//--Calculate angle
+					v.angle = getVectorAngle(true,v.pos.x, v.pos.y);
 				
 
-				//--Add verts to the main array
-				if((v.pos).sqrMagnitude <= lightRadius*lightRadius){
-					tempVerts.Add(v);
 
-				}
+					// -- bookmark if an angle is lower than 0 or higher than 2f --//
+					//-- helper method for fix bug on shape located in 2 or more quadrants
+					if(v.angle < 0f )
+						lows = true;
 					
-				if(sortAngles == false)
-					sortAngles = true;
-			
+					if(v.angle > 2f)
+						his = true;
+					
+
+					//--Add verts to the main array
+					if((v.pos).sqrMagnitude <= lightRadius*lightRadius){
+						tempVerts.Add(v);
+
+					}
+						
+					if(sortAngles == false)
+						sortAngles = true;
+
+				}
 			
 			}
 
@@ -217,7 +219,7 @@ public class DynamicLight : MonoBehaviour {
 				for(int r = 0; r<2; r++){
 
 					//-- Cast a ray in same direction continuos mode, start a last point of last ray --//
-					Vector3 fromCast = new Vector3();
+					Vector2 fromCast = new Vector2();
 					bool isEndpoint = false;
 
 					if(r==0){
@@ -234,24 +236,25 @@ public class DynamicLight : MonoBehaviour {
 
 
 					if(isEndpoint == true){
-						Vector3 dir = (fromCast - transform.position);
-						fromCast += (dir * .01f);
+						Vector2 dir = (fromCast - (Vector2) transform.position);
+						fromCast += dir.normalized*0.1f;
 						
 						
 						
-						float mag = (lightRadius);// - fromCast.magnitude;
-						RaycastHit2D rayCont = Physics2D.Raycast(fromCast, dir, mag);
+						float mag = (lightRadius);//-dir.magnitude);// - fromCast.magnitude;
+						RaycastHit2D rayCont = Physics2D.Raycast(fromCast, dir.normalized, mag);
 						//Debug.DrawLine(fromCast, dir.normalized*mag ,Color.green);
 
 						
-						Vector3 hitp;
+						Vector2 hitp;
 						if(rayCont){
-							hitp = rayCont.point;
+							if((rayCont.point-(Vector2)transform.position).magnitude >= lightRadius) hitp = transform.TransformPoint( dir.normalized * mag);
+							else hitp = rayCont.point;
 						}else{
 							hitp = transform.TransformPoint( dir.normalized * mag);
 						}
 
-						Debug.DrawLine(fromCast, hitp, Color.green);	
+						Debug.DrawLine(new Vector3(fromCast.x,fromCast.y, transform.position.z), new Vector3(hitp.x,hitp.y, transform.position.z), Color.green);	
 
 						verts vL = new verts();
 						vL.pos = transform.InverseTransformPoint(hitp);
@@ -289,15 +292,16 @@ public class DynamicLight : MonoBehaviour {
 
 			verts v = new verts();
 			//v.pos = new Vector3((Mathf.Sin(theta)), (Mathf.Cos(theta)), 0); // in radians low performance
-			v.pos = new Vector3((PseudoSinCos.SinArray[theta]), (PseudoSinCos.CosArray[theta]), 0); // in dregrees (previous calculate)
+			v.pos = new Vector2((PseudoSinCos.SinArray[theta]), (PseudoSinCos.CosArray[theta])); // in dregrees (previous calculate)
 
 			v.angle = getVectorAngle(true,v.pos.x, v.pos.y);
 			v.pos *= lightRadius;
-			v.pos += transform.position;
+			v.pos +=  (Vector2) transform.position;
 
 
+			Vector2 origen = (Vector2) transform.position;
 
-			RaycastHit2D ray = Physics2D.Raycast(transform.position,v.pos - transform.position,lightRadius);
+			RaycastHit2D ray = Physics2D.Raycast(origen,v.pos - origen,lightRadius);
 			//Debug.DrawRay(transform.position, v.pos - transform.position, Color.white);
 
 			if (!ray){
@@ -376,7 +380,7 @@ public class DynamicLight : MonoBehaviour {
 		
 		for (int i = 0; i < allVertices.Count; i++) { 
 			//Debug.Log(allVertices[i].angle);
-			initVerticesMeshLight [i+1] = allVertices[i].pos;
+			initVerticesMeshLight [i+1] = new Vector3(allVertices[i].pos.x, allVertices[i].pos.y, transform.position.z);
 			
 			//if(allVertices[i].endpoint == true)
 			//Debug.Log(allVertices[i].angle);
