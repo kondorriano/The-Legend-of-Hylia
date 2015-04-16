@@ -61,6 +61,7 @@ public class CameraDivisionEffect : MonoBehaviour {
 			renderMainCamera = false;
 		}
 
+		dir.z = 0;
 		dir.Normalize ();
 
 		if (move1) {
@@ -117,38 +118,6 @@ public class CameraDivisionEffect : MonoBehaviour {
 			camera2.position = cameraPos;
 		}
 		 */		
-	}
-
-
-
-	void getDivisionPoints(Vector2 p1, Vector2 p2, out Vector2 inter1, out Vector2 inter2) {
-		float w = Screen.width;
-		float h = Screen.height;
-
-		if(p1.x == p2.x) {
-			inter1 = new Vector2(w/2f,h);
-			inter2 = new Vector2(w/2f,0f);
-		} else if(p1.y == p2.y) {
-			inter1 = new Vector2(0,h/2f);
-			inter2 = new Vector2(w,h/2f);
-		} else {
-			float m =  -(p2.x-p1.x)/(p2.y-p1.y);
-			float n = h/2f-(w*m)/2f;
-
-			if(m==h/w) {
-				inter1 = new Vector2(0,0);
-				inter2 = new Vector2(w,h);
-			} else if(m==-h/w) {
-				inter1 = new Vector2(0,h);
-				inter2 = new Vector2(w,0);
-			} else if (-h/w < m && m < h/w) {
-				inter1 = new Vector2(0,n);
-				inter2 = new Vector2(w,n+w*m);
-			} else {
-				inter1 = new Vector2(-n/m , 0);
-				inter2 = new Vector2(w + n/m , h);
-			}
-		}
 	}
 
 	public Shader shader;
