@@ -68,6 +68,8 @@ public class EquipedItem : MonoBehaviour {
 			} else {
 				item.GetComponent<Boomerang>().InitBoomerang(transform, direction.normalized);
 			}
+
+			item.transform.SetParent(transform.parent);
 		}
 	}
 

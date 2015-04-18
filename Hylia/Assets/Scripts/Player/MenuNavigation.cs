@@ -14,6 +14,8 @@ public class MenuNavigation : MonoBehaviour {
 	int itemSelectedIndex = 0;
 	bool active = false;
 	Image[] items;
+	RectTransform select;
+
 	Animator anim;
 	AudioSource myAudio;
 	private int id;
@@ -28,14 +30,18 @@ public class MenuNavigation : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		myAudio = GetComponent<AudioSource> ();
 		Transform menu = transform.Find ("Menu");
-		items = new Image[menu.childCount];
+		items = new Image[menu.childCount-1];
 		int index = 0;
 		foreach (Transform item in menu) {
-			items [index] = item.GetComponent<Image>();
-			items [index].sprite = Items.itemList[(int)menuItems[index]].menuSprite;
-			float alpha = (items[index].sprite == null) ? 0 : 1;
-			items[index].color = new Color(0.5f,0.5f,0.5f,alpha);
-			++index;
+			if(item.name != "Select") {
+				items [index] = item.GetComponent<Image>();
+				items [index].sprite = Items.itemList[(int)menuItems[index]].menuSprite;
+				float alpha = (items[index].sprite == null) ? 0 : 1;
+				items[index].color = new Color(0.5f,0.5f,0.5f,alpha);
+				++index;
+			} else {
+				select = (RectTransform) item;
+			}
 		}
 		items[itemSelectedIndex].color = new Color(1f,1f,1f,items[itemSelectedIndex].color.a);
 
@@ -75,7 +81,10 @@ public class MenuNavigation : MonoBehaviour {
 			if(sum != 0) {
 				items[itemSelectedIndex].color = new Color(0.5f,0.5f,0.5f,items[itemSelectedIndex].color.a);
 				itemSelectedIndex = (items.Length + itemSelectedIndex + sum)%items.Length;
-				items[itemSelectedIndex].color = new Color(1f,1f,1f,items[itemSelectedIndex].color.a);;
+				items[itemSelectedIndex].color = new Color(1f,1f,1f,items[itemSelectedIndex].color.a);
+
+				select.anchoredPosition = ((RectTransform) items[itemSelectedIndex].transform).anchoredPosition;
+
 
 				myAudio.Stop();
 				myAudio.volume = 1;
