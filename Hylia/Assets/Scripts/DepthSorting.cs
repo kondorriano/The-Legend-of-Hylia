@@ -9,7 +9,7 @@ public class DepthSorting : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		foreach (Transform child in transform) {
 			Vector3 pos = child.localPosition;
 			pos.z = pos.y * 0.25f;

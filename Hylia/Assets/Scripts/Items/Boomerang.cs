@@ -10,8 +10,8 @@ public class Boomerang : MonoBehaviour {
 	int state = 0;
 
 	float counter = 0f;
-	Vector3 startPosition;
-	Vector3 endPosition = Vector3.zero;
+	Vector2 startPosition;
+	Vector2 endPosition = Vector3.zero;
 	Transform myPlayer;
 	Rigidbody2D myRigidbody;
 	// Use this for initialization
@@ -24,29 +24,29 @@ public class Boomerang : MonoBehaviour {
 	void Update () {
 		transform.Rotate (-Vector3.forward * rotationSpeed * Time.deltaTime);
 		if (state == 0) {
-			if ((endPosition - startPosition).sqrMagnitude <= (transform.position - startPosition).sqrMagnitude)
+			if ((endPosition - startPosition).sqrMagnitude <= ((Vector2)transform.position - startPosition).sqrMagnitude)
 				state = 1;
 		}
 
 		if (state == 1) {
-			myRigidbody.velocity = Vector2.Lerp(myRigidbody.velocity, (myPlayer.position-transform.position).normalized*speed, counter);
+			myRigidbody.velocity = Vector2.Lerp(myRigidbody.velocity, ((Vector2)myPlayer.position-(Vector2)transform.position).normalized*speed, counter);
 			counter += Time.deltaTime;
 			//myRigidbody.velocity += (Vector2) (myPlayer.position-transform.position).normalized*acceleration*Time.deltaTime;
 			if(counter >= 1) state = 2;
-			if((myPlayer.position-transform.position).sqrMagnitude <= 0.1f) Destroy (gameObject);
+			if(((Vector2)myPlayer.position-(Vector2)transform.position).sqrMagnitude <= 0.1f) Destroy (gameObject);
 
 		} 
 		if (state == 2) {
-			myRigidbody.velocity = (myPlayer.position-transform.position).normalized*speed;
-			if((myPlayer.position-transform.position).sqrMagnitude <= 0.1f) Destroy (gameObject);
+			myRigidbody.velocity = ((Vector2)myPlayer.position-(Vector2)transform.position).normalized*speed;
+			if(((Vector2)myPlayer.position-(Vector2)transform.position).sqrMagnitude <= 0.1f) Destroy (gameObject);
 		}
 	}
 
-	public void InitBoomerang(Transform player, Vector3 dir) {
+	public void InitBoomerang(Transform player, Vector2 dir) {
 		myPlayer = player;
-		startPosition = transform.position;
+		startPosition = (Vector2)transform.position;
 		myRigidbody = GetComponent<Rigidbody2D> ();
-		endPosition = transform.position+dir*distance;
+		endPosition = (Vector2)transform.position+dir*distance;
 		
 		myRigidbody.velocity = dir * speed;
 	}

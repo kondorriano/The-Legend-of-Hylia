@@ -52,23 +52,30 @@ public class EquipedItem : MonoBehaviour {
 	protected void OnBoomerang()
 	{
 		if (Input.GetButtonDown ("360_A"+id)) {
-			GameObject item = (GameObject) Instantiate(Items.itemList[(int) myItem].prefab, transform.position, transform.rotation);
-			
-			Vector3 direction = mov.getWalkDirection();
+			Vector2 direction = mov.getWalkDirection();
+			Vector2 boomerangDirection = Vector2.zero;
+			Vector3 boomerangPosition = transform.position;
+
 			if(direction.magnitude == 0) {
 				Movement.LookDirection dir = mov.getLooking();
-				if(dir == Movement.LookDirection.Up)
-					item.GetComponent<Boomerang>().InitBoomerang(transform, transform.up);
-				if(dir == Movement.LookDirection.Down)
-					item.GetComponent<Boomerang>().InitBoomerang(transform, -transform.up);
+				if(dir == Movement.LookDirection.Up) {
+					boomerangDirection = transform.up;
+					boomerangPosition += transform.up*0.25f + transform.forward*0.25f;
+				}
+				if(dir == Movement.LookDirection.Down) {
+					boomerangDirection = -transform.up;
+					boomerangPosition += -transform.up*0.25f - transform.forward*0.25f;
+				}
 				if(dir == Movement.LookDirection.Left)
-					item.GetComponent<Boomerang>().InitBoomerang(transform, -transform.right);
+					boomerangDirection = -transform.right;
 				if(dir == Movement.LookDirection.Right)
-					item.GetComponent<Boomerang>().InitBoomerang(transform, transform.right);
+					boomerangDirection = transform.right;
 			} else {
-				item.GetComponent<Boomerang>().InitBoomerang(transform, direction.normalized);
+				boomerangDirection = direction.normalized;
 			}
 
+			GameObject item = (GameObject) Instantiate(Items.itemList[(int) myItem].prefab, boomerangPosition, transform.rotation);
+			item.GetComponent<Boomerang>().InitBoomerang(transform, boomerangDirection);
 			item.transform.SetParent(transform.parent);
 		}
 	}

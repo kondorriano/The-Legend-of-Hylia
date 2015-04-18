@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour {
 	Animator anim;
 	Rigidbody2D myRigidbody;
 	LookDirection looking = LookDirection.Right;
-	Vector3 walkDirection = Vector3.zero;
+	Vector2 walkDirection = Vector2.zero;
 
 
 	void setId(int myId) {
@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour {
 		if (Mathf.Abs (xAxis) < 0.15f) xAxis = 0;
 		if (Mathf.Abs (yAxis) < 0.15f) yAxis = 0;
 
-		walkDirection = new Vector3 (xAxis, yAxis, 0);
+		walkDirection = new Vector2 (xAxis, yAxis);
 
 		up = (yAxis >= 0.15f);
 		down = (yAxis <= -0.15f);
@@ -92,7 +92,7 @@ public class Movement : MonoBehaviour {
 		return looking;
 	}
 
-	public Vector3 getWalkDirection() {
+	public Vector2 getWalkDirection() {
 		return walkDirection;
 	}
 }
