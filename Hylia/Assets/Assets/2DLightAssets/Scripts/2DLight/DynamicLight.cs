@@ -55,7 +55,7 @@ public class DynamicLight : MonoBehaviour {
 		//getAllMeshes();
 		setLight ();
 		renderLightMesh ();
-		resetBounds ();
+		//resetBounds ();
 
 	}
 
@@ -416,12 +416,12 @@ public class DynamicLight : MonoBehaviour {
 		}
 		
 		
-		lightMesh.triangles = triangles;												
+		lightMesh.triangles = triangles;
+
 		//lightMesh.RecalculateNormals();
 		GetComponent<Renderer>().sharedMaterial = lightMaterial;
-
+		GetComponent<MeshCollider> ().sharedMesh = null;
 		GetComponent<MeshCollider> ().sharedMesh = lightMesh;
-
 	}
 
 	void sortList(List<verts> lista){
