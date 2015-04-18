@@ -33,16 +33,19 @@ public class MenuShareNavigation : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		myItem.sprite = menu.getItemSelected ();
+		int myId = menu.getItemSelectedId ();
+		myItem.sprite = Items.itemList[myId].menuSprite;
 		myItem.color = (myItem.sprite == null) ? new Color(1,1,1,0) : Color.white;
 
-		otherItem.sprite = otherMenu.getItemSelected ();
+		int otherId = otherMenu.getItemSelectedId ();
+		otherItem.sprite = Items.itemList[otherId].menuSprite;
 		otherItem.color = (otherItem.sprite == null) ? new Color(1,1,1,0) : Color.white;
 
 		if (Input.GetButtonDown ("360_Y" + id)) {
-			if(menu.isActive() && otherMenu.isActive() && GetComponent<MenusControl>().isActiveShare()) {
-				menu.setItemSelected(otherItem.sprite);
-				otherMenu.setItemSelected(myItem.sprite);
+			if(menu.isActive() && otherMenu.isActive() && GetComponent<MenusControl>().isActiveShare()
+			   && (myItem.sprite != null) && (otherItem.sprite != null)) {
+				menu.setItemSelectedId(otherId);
+				otherMenu.setItemSelectedId(myId);
 
 				audio.Stop();
 				audio.volume = 1;

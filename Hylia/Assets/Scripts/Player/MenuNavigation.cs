@@ -8,9 +8,12 @@ public class MenuNavigation : MonoBehaviour {
 	public AudioClip popOut;
 	public AudioClip moveCursor;
 
+	public Items.ItemType[] menuItems;
+
+
 	int itemSelectedIndex = 0;
 	bool active = false;
-	Transform[] items;
+	Image[] items;
 	Animator anim;
 	AudioSource audio;
 	private int id;
@@ -25,13 +28,16 @@ public class MenuNavigation : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		audio = GetComponent<AudioSource> ();
 		Transform menu = transform.Find ("Menu");
-		items = new Transform[menu.childCount];
+		items = new Image[menu.childCount];
 		int index = 0;
 		foreach (Transform item in menu) {
-			items [index] = item;
+			items [index] = item.GetComponent<Image>();
+			items [index].sprite = Items.itemList[(int)menuItems[index]].menuSprite;
+			float alpha = (items[index].sprite == null) ? 0 : 1;
+			items[index].color = new Color(0.5f,0.5f,0.5f,alpha);
 			++index;
 		}
-		items[itemSelectedIndex].GetComponent<Image>().color = Color.white;
+		items[itemSelectedIndex].color = new Color(1f,1f,1f,items[itemSelectedIndex].color.a);
 
 
 	}
@@ -47,12 +53,12 @@ public class MenuNavigation : MonoBehaviour {
 
 			int sum = 0;
 			if(yAxis == 1) {
-				if(!up)	sum += -3;
+				if(!up)	sum += -1;
 				up = true;
 			} else up = false;
 
 			if(yAxis == -1) {
-				if(!down) sum += 3;
+				if(!down) sum += 1;
 				down = true;
 			} else down = false;
 
@@ -67,9 +73,9 @@ public class MenuNavigation : MonoBehaviour {
 			} else left = false;
 
 			if(sum != 0) {
-				items[itemSelectedIndex].GetComponent<Image>().color = new Color(0.5f,0.5f,0.5f,1f);
+				items[itemSelectedIndex].color = new Color(0.5f,0.5f,0.5f,items[itemSelectedIndex].color.a);
 				itemSelectedIndex = (items.Length + itemSelectedIndex + sum)%items.Length;
-				items[itemSelectedIndex].GetComponent<Image>().color = Color.white;
+				items[itemSelectedIndex].color = new Color(1f,1f,1f,items[itemSelectedIndex].color.a);;
 
 				audio.Stop();
 				audio.volume = 1;
@@ -94,12 +100,19 @@ public class MenuNavigation : MonoBehaviour {
 		return active;
 	}
 
-	public Sprite getItemSelected() {
-
-		return (active) ? items[itemSelectedIndex].GetComponent<Image>().sprite : null;
+	public int getItemSelectedId() {
+		return (active) ? (int) menuItems[itemSelectedIndex] : (int) Items.ItemType.None;
 	}
 
-	public void setItemSelected(Sprite spr) {		
-		items[itemSelectedIndex].GetComponent<Image>().sprite = spr;
+	public void setItemSelectedId(int itemId) {	
+		menuItems [itemSelectedIndex] = (Items.ItemType) itemId;
+		items[itemSelectedIndex].sprite = Items.itemList[itemId].menuSprite;
+		Color col = items [itemSelectedIndex].color;
+		col.a = (items[itemSelectedIndex].sprite == null) ? 0 : 1;
+		items [itemSelectedIndex].color = col;
+	}
+
+	public int getItemEquipedId() {
+		return (int) menuItems[itemSelectedIndex];
 	}
 }
