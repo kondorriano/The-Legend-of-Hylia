@@ -2,22 +2,19 @@
 using System.Collections;
 
 public class things : MonoBehaviour {
+	public LayerMask lightLayer;
 
 	MeshCollider mC;
 	// Use this for initialization
 	void Start () {
-		mC = GameObject.FindGameObjectWithTag ("Player").GetComponent<MeshCollider> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		RaycastHit hit;
-		Ray test = new Ray(transform.position, -transform.forward);
-		Debug.DrawRay (transform.position, -transform.forward*10f);
-
-		if(mC.Raycast(test, out hit, 10f)) {
-			Debug.Log(hit.collider.gameObject.name);
-		}
+		Debug.DrawRay (transform.position, transform.forward * 100);
+		if(Physics.Raycast(transform.position,  transform.forward, 100, lightLayer)) {
+			Debug.Log("Luz!");
+		} else Debug.Log("Sombra!");
 
 
 	}
