@@ -31,6 +31,7 @@ public class DynamicLight : MonoBehaviour {
 	
 	// Called at beginning of script execution
 	void Start () {
+		transform.position = new Vector3 (transform.position.x, transform.position.y, LightController.lightPosition);
 		PseudoSinCos.initPseudoSinCos();
 		
 		//-- Step 1: obtain all active meshes in the scene --//

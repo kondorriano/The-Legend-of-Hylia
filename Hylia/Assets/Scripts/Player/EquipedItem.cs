@@ -3,6 +3,9 @@ using System.Collections;
 
 public class EquipedItem : MonoBehaviour {
 
+	public LayerMask lightLayer;
+
+
 	Movement mov;
 	MenuNavigation menu;
 	Items.ItemType myItem;
@@ -97,7 +100,26 @@ public class EquipedItem : MonoBehaviour {
 
 	protected void OnMoonPearl()
 	{
-		
+		if (Input.GetButtonDown ("360_A" + id)) {
+
+			int onLight = 0;
+			PolygonCollider2D myMesh = GetComponent<PolygonCollider2D>();
+
+			for (int i = 0; i < myMesh.GetTotalPointCount(); i++) {
+				Vector2 worldPoint = myMesh.transform.TransformPoint(myMesh.points[i]);
+				//Still had to add stuff
+				Vector3 position = new Vector3 (worldPoint.x, worldPoint.y, LightController.lightPosition - 1);
+				Debug.DrawRay (position, transform.forward * 2);
+				
+				if (Physics.Raycast (position, transform.forward, 20, lightLayer)) {
+					//Debug.Log ("Luz!");
+					++onLight;
+				} //else
+					//Debug.Log ("Sombra!");
+			}
+
+			Debug.Log (onLight);
+		}
 	}
 
 	protected void OnSunPearl()

@@ -11,9 +11,11 @@ public class DepthSorting : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 		foreach (Transform child in transform) {
-			Vector3 pos = child.localPosition;
-			pos.z = pos.y * 0.25f;
-			child.localPosition = pos;
+			OffsetPositionObject oPO = child.GetComponent<OffsetPositionObject>();
+			Vector3 pos = (oPO == null) ? child.position : child.TransformPoint (oPO.getOffsetPosition());
+
+			pos = new Vector3(child.position.x, child.position.y, pos.y * 0.25f);
+			child.position = pos;
 		}
 	}
 }
