@@ -85,7 +85,15 @@ public class EquipedItem : MonoBehaviour {
 
 	protected void OnBombs()
 	{
-		
+		if (Input.GetButtonDown ("360_A"+id)) {
+			Movement.LookDirection dir = mov.getLooking();
+			Vector3 offset = new Vector3(0.0f,-0.50f,0.0f) ;;
+			Vector3 bombPosition = transform.position + offset; 
+			
+			GameObject item = (GameObject) Instantiate(Items.itemList[(int) myItem].prefab, bombPosition, transform.rotation);
+			item.GetComponent<Bomb>().InitBomb(transform);
+			item.transform.SetParent(transform.parent);
+		}
 	}
 
 	protected void OnBow()
