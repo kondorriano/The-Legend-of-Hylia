@@ -3,7 +3,6 @@ using System.Collections;
 
 public class EquipedItem : MonoBehaviour {
 
-	public GameObject prefab;
 	Movement mov;
 	MenuNavigation menu;
 	Items.ItemType myItem;

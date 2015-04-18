@@ -36,8 +36,6 @@ public class CameraDivisionEffect : MonoBehaviour {
 	void Update () {
 		Vector2 currentScreenSize = new Vector2(Screen.width, Screen.height);
 		if(currentScreenSize != screenSize) updateTextures();
-		Vector2 p1 = player1.position;
-		Vector2 p2 = player2.position;
 
 		Vector3 dir = (player2.position - player1.position);
 		direction = new Vector3 (dir.x, dir.y, 0);

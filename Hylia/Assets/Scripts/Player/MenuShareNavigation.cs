@@ -13,7 +13,7 @@ public class MenuShareNavigation : MonoBehaviour {
 	MenuNavigation menu;
 	MenuNavigation otherMenu;
 
-	AudioSource audio;
+	AudioSource myAudio;
 	private int id;
 
 	void setId(int myId) {
@@ -22,7 +22,7 @@ public class MenuShareNavigation : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		audio = GetComponent<AudioSource> ();
+		myAudio = GetComponent<AudioSource> ();
 
 		myItem = transform.Find ("MenuShare/MyItem").GetComponent<Image> ();
 		otherItem = transform.Find ("MenuShare/OtherItem").GetComponent<Image> ();
@@ -47,10 +47,10 @@ public class MenuShareNavigation : MonoBehaviour {
 				menu.setItemSelectedId(otherId);
 				otherMenu.setItemSelectedId(myId);
 
-				audio.Stop();
-				audio.volume = 1;
-				audio.clip = share;
-				audio.Play();
+				myAudio.Stop();
+				myAudio.volume = 1;
+				myAudio.clip = share;
+				myAudio.Play();
 			}
 		}
 

@@ -15,7 +15,7 @@ public class MenuNavigation : MonoBehaviour {
 	bool active = false;
 	Image[] items;
 	Animator anim;
-	AudioSource audio;
+	AudioSource myAudio;
 	private int id;
 
 
@@ -26,7 +26,7 @@ public class MenuNavigation : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
-		audio = GetComponent<AudioSource> ();
+		myAudio = GetComponent<AudioSource> ();
 		Transform menu = transform.Find ("Menu");
 		items = new Image[menu.childCount];
 		int index = 0;
@@ -77,20 +77,20 @@ public class MenuNavigation : MonoBehaviour {
 				itemSelectedIndex = (items.Length + itemSelectedIndex + sum)%items.Length;
 				items[itemSelectedIndex].color = new Color(1f,1f,1f,items[itemSelectedIndex].color.a);;
 
-				audio.Stop();
-				audio.volume = 1;
-				audio.clip = moveCursor;
-				audio.Play();
+				myAudio.Stop();
+				myAudio.volume = 1;
+				myAudio.clip = moveCursor;
+				myAudio.Play();
 			}
 		}
 
 		if (Input.GetButtonDown ("360_Start"+id)) {
 			active = !active;
 
-			audio.Stop();
-			audio.volume = 1;
-			audio.clip = (active) ? popUp : popOut;
-			audio.Play();
+			myAudio.Stop();
+			myAudio.volume = 1;
+			myAudio.clip = (active) ? popUp : popOut;
+			myAudio.Play();
 
 		}
 		anim.SetBool ("Active", active);

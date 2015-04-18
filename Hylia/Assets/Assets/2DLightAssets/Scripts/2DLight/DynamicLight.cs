@@ -18,8 +18,7 @@ public class DynamicLight : MonoBehaviour {
 	
 	// Public variables
 	public Material lightMaterial;
-	public PolygonCollider2D[] allMeshes;									// Array for all of the meshes in our scene
-
+	//public PolygonCollider2D[] allMeshes;									// Array for all of the meshes in our scene
 
 	public List<verts> allVertices = new List<verts>();								// Array for all of the vertices in our meshes
 	public float lightRadius = 20f;
@@ -50,11 +49,10 @@ public class DynamicLight : MonoBehaviour {
 
 
 	}
-	
 
 	void Update(){
 
-		getAllMeshes();
+		//getAllMeshes();
 		setLight ();
 		renderLightMesh ();
 		resetBounds ();
@@ -62,9 +60,11 @@ public class DynamicLight : MonoBehaviour {
 	}
 
 
+	/*
 	void getAllMeshes(){
 		allMeshes = FindObjectsOfType(typeof(PolygonCollider2D)) as PolygonCollider2D[];
 	}
+	*/
 
 	void resetBounds(){
 		Bounds b = lightMesh.bounds;
@@ -93,10 +93,10 @@ public class DynamicLight : MonoBehaviour {
 
 		List <verts> tempVerts = new List<verts>();
 
-		for (int m = 0; m < allMeshes.Length; m++) {
+		for (int m = 0; m < LightController.lightableObjectsList.Count; m++) {
 		//for (int m = 0; m < 1; m++) {
 			tempVerts.Clear();
-			PolygonCollider2D mf = allMeshes[m];
+			PolygonCollider2D mf = LightController.lightableObjectsList[m].GetComponent<PolygonCollider2D>();
 
 			// las siguientes variables usadas para arregla bug de ordenamiento cuando
 			// los angulos calcuados se encuentran en cuadrantes mixtos (1 y 4)

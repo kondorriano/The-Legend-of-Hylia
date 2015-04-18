@@ -13,7 +13,7 @@ public class Boomerang : MonoBehaviour {
 	Vector3 startPosition;
 	Vector3 endPosition = Vector3.zero;
 	Transform myPlayer;
-	Rigidbody2D rigidbody;
+	Rigidbody2D myRigidbody;
 	// Use this for initialization
 	void Start () {
 	
@@ -29,15 +29,15 @@ public class Boomerang : MonoBehaviour {
 		}
 
 		if (state == 1) {
-			rigidbody.velocity = Vector2.Lerp(rigidbody.velocity, (myPlayer.position-transform.position).normalized*speed, counter);
+			myRigidbody.velocity = Vector2.Lerp(myRigidbody.velocity, (myPlayer.position-transform.position).normalized*speed, counter);
 			counter += Time.deltaTime;
-			//rigidbody.velocity += (Vector2) (myPlayer.position-transform.position).normalized*acceleration*Time.deltaTime;
+			//myRigidbody.velocity += (Vector2) (myPlayer.position-transform.position).normalized*acceleration*Time.deltaTime;
 			if(counter >= 1) state = 2;
 			if((myPlayer.position-transform.position).sqrMagnitude <= 0.1f) Destroy (gameObject);
 
 		} 
 		if (state == 2) {
-			rigidbody.velocity = (myPlayer.position-transform.position).normalized*speed;
+			myRigidbody.velocity = (myPlayer.position-transform.position).normalized*speed;
 			if((myPlayer.position-transform.position).sqrMagnitude <= 0.1f) Destroy (gameObject);
 		}
 	}
@@ -45,9 +45,9 @@ public class Boomerang : MonoBehaviour {
 	public void InitBoomerang(Transform player, Vector3 dir) {
 		myPlayer = player;
 		startPosition = transform.position;
-		rigidbody = GetComponent<Rigidbody2D> ();
+		myRigidbody = GetComponent<Rigidbody2D> ();
 		endPosition = transform.position+dir*distance;
 		
-		rigidbody.velocity = dir * speed;
+		myRigidbody.velocity = dir * speed;
 	}
 }

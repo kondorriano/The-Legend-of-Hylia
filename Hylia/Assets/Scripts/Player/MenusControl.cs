@@ -13,7 +13,7 @@ public class MenusControl : MonoBehaviour {
 	Transform player;
 	CameraDivisionEffect cam;
 	Animator anim;
-	AudioSource audio;
+	AudioSource myAudio;
 
 
 	bool previousActiveShare = false;
@@ -27,7 +27,7 @@ public class MenusControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
-		audio = GetComponent<AudioSource> ();
+		myAudio = GetComponent<AudioSource> ();
 
 		cam = Camera.main.GetComponent<CameraDivisionEffect> ();
 		player = GameObject.FindGameObjectWithTag ("Player" + id).transform;
@@ -52,10 +52,10 @@ public class MenusControl : MonoBehaviour {
 		else isRight = true;
 
 		if (!previousActiveShare && activeShare && anim.GetBool("Active")) {
-			audio.Stop();
-			audio.volume = 0.5f;
-			audio.clip = popUpShare;
-			audio.Play();
+			myAudio.Stop();
+			myAudio.volume = 0.5f;
+			myAudio.clip = popUpShare;
+			myAudio.Play();
 		}
 		previousActiveShare = activeShare;
 
