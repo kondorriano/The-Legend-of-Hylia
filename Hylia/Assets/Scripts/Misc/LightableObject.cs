@@ -17,15 +17,16 @@ public class LightableObject : MonoBehaviour {
 	public void addLightableObject() {
 		if(active) return;
 		LightController.lightableObjectsList.Add(transform);
-		gameObject.layer = 0; //Default
+		gameObject.layer = 9; //Lightable
 		active = true;
 	}
 
 	public void removeLightableObject() {
 		if(!active) return;
 		LightController.lightableObjectsList.Remove (transform);
-		gameObject.layer = 2; //IgnoreRayCast
+		gameObject.layer = 0; //Default
 		active = false;
+
 	}
 
 }

@@ -24,6 +24,9 @@ public class DynamicLight : MonoBehaviour {
 	public float lightRadius = 20f;
 	public int lightSegments = 8;
 
+	public LayerMask lightableLayer;
+
+
 
 	
 	// Private variables
@@ -116,7 +119,7 @@ public class DynamicLight : MonoBehaviour {
 				if((worldPoint-(Vector2) transform.position).magnitude <= lightRadius) {
 					Vector2 origen = transform.position;
 					// Reforma fecha 24/09/2014 (ultimo argumento lighradius X worldPoint.magnitude (expensivo pero preciso))
-					RaycastHit2D ray = Physics2D.Raycast(origen, (worldPoint - origen).normalized, (worldPoint - origen).magnitude);
+					RaycastHit2D ray = Physics2D.Raycast(origen, (worldPoint - origen).normalized, (worldPoint - origen).magnitude, lightableLayer);
 
 
 					if(ray){
@@ -243,7 +246,7 @@ public class DynamicLight : MonoBehaviour {
 						
 						
 						float mag = (lightRadius);//-dir.magnitude);// - fromCast.magnitude;
-						RaycastHit2D rayCont = Physics2D.Raycast(fromCast, dir.normalized, mag);
+						RaycastHit2D rayCont = Physics2D.Raycast(fromCast, dir.normalized, mag, lightableLayer);
 						//Debug.DrawLine(fromCast, dir.normalized*mag ,Color.green);
 
 						
@@ -302,7 +305,7 @@ public class DynamicLight : MonoBehaviour {
 
 			Vector2 origen = (Vector2) transform.position;
 
-			RaycastHit2D ray = Physics2D.Raycast(origen,v.pos - origen,lightRadius);
+			RaycastHit2D ray = Physics2D.Raycast(origen,v.pos - origen,lightRadius, lightableLayer);
 			//Debug.DrawRay(transform.position, v.pos - transform.position, Color.white);
 
 			if (!ray){
