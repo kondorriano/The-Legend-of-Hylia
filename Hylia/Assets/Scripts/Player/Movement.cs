@@ -10,7 +10,8 @@ public class Movement : MonoBehaviour {
 		Down
 	}
 
-	public float speed = 10f;
+	public float initialSpeed = 7f;
+	private float speed;
 	private int id;
 	bool movingLastFrame = false;
 	Animator anim;
@@ -27,6 +28,7 @@ public class Movement : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		myRigidbody = GetComponent<Rigidbody2D> ();
 		looking = LookDirection.Up;
+		speed = initialSpeed;
 	}
 	
 	// Update is called once per frame
@@ -94,5 +96,9 @@ public class Movement : MonoBehaviour {
 
 	public Vector2 getWalkDirection() {
 		return walkDirection;
+	}
+
+	public void setSpeed(float multiplier) {
+		speed = initialSpeed * multiplier;
 	}
 }

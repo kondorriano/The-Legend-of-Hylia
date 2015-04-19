@@ -14,20 +14,16 @@ public class LightableObject : MonoBehaviour {
 
 
 	public void addLightableObject() {
+		if(active) return;
 		LightController.lightableObjectsList.Add(transform);
 		gameObject.layer = 0; //Default
+		active = true;
 	}
 
 	public void removeLightableObject() {
+		if(!active) return;
 		LightController.lightableObjectsList.Remove (transform);
 		gameObject.layer = 2; //IgnoreRayCast
-	}
-
-	void Update() {
-		if(Input.GetKeyDown(KeyCode.LeftControl)) {
-			if(active) removeLightableObject();
-			else addLightableObject ();
-			active = !active;
-		}
+		active = false;
 	}
 }

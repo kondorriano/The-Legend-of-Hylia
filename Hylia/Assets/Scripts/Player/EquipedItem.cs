@@ -3,11 +3,17 @@ using System.Collections;
 
 public class EquipedItem : MonoBehaviour {
 
+	public AudioClip activatePearl;
+	public AudioClip deactivatePearl;
+
 	public LayerMask lightLayer;
+	private bool moonMode = false;
+	private bool sunMode = false;
 
 
 	Movement mov;
 	MenuNavigation menu;
+	AudioSource myAudio;
 	Items.ItemType myItem;
 	private int id;
 
@@ -22,6 +28,7 @@ public class EquipedItem : MonoBehaviour {
 	void Start () {
 		mov = GetComponent<Movement> ();
 		menu = transform.Find ("Canvas").GetComponent<MenuNavigation> ();
+		myAudio = GetComponent<AudioSource> ();
 		InitCallBacks ();
 
 	}
@@ -106,32 +113,102 @@ public class EquipedItem : MonoBehaviour {
 		
 	}
 
+	void setMoonMode(bool moon) {
+		moonMode = moon;
+		if (moonMode) {
+			GetComponent<LightableObject> ().removeLightableObject ();
+			Color col = Color.black;
+			col.a = 0.5f;
+			GetComponent<SpriteRenderer>().color = col;
+			GetComponent<Movement>().setSpeed(1.6f);
+			myAudio.Stop();
+			myAudio.clip = activatePearl;
+			myAudio.Play();
+
+		} else {
+			GetComponent<LightableObject> ().addLightableObject ();
+			GetComponent<SpriteRenderer>().color = Color.white;
+			GetComponent<Movement>().setSpeed(1);
+			myAudio.Stop();
+			myAudio.clip = deactivatePearl;
+			myAudio.Play();
+		}
+	}
+
 	protected void OnMoonPearl()
 	{
-		if (Input.GetButtonDown ("360_A" + id)) {
+		if (Input.GetButtonDown ("360_A" + id)) setMoonMode(!moonMode);
 
-			int onLight = 0;
-			PolygonCollider2D myMesh = GetComponent<PolygonCollider2D>();
+		if (moonMode) {
+			Debug.Log("MoonMode");
+			bool onShadow = true;
 
-			for (int i = 0; i < myMesh.GetTotalPointCount(); i++) {
-				Vector2 worldPoint = myMesh.transform.TransformPoint(myMesh.points[i]);
-				//Still had to add stuff
+			PolygonCollider2D myMesh = GetComponent<PolygonCollider2D> ();
+
+			for (int i = 0; i < myMesh.GetTotalPointCount() && onShadow; i++) {
+				Vector2 localPoint = myMesh.points [i];
+				localPoint = localPoint + (localPoint - (Vector2)GetComponent<OffsetPositionObject> ().getOffsetPosition ()).normalized * 0.01f;
+
+				Vector2 worldPoint = myMesh.transform.TransformPoint (localPoint);
+
 				Vector3 position = new Vector3 (worldPoint.x, worldPoint.y, LightController.lightPosition - 1);
 				Debug.DrawRay (position, transform.forward * 2);
 				
-				if (Physics.Raycast (position, transform.forward, 20, lightLayer)) {
-					//Debug.Log ("Luz!");
-					++onLight;
-				} //else
-					//Debug.Log ("Sombra!");
+				if (Physics.Raycast (position, transform.forward, 20, lightLayer)) onShadow = false;
 			}
 
-			Debug.Log (onLight);
+			if(!onShadow) setMoonMode(false);
+
+		}
+
+	}
+
+	void setSunMode(bool sun) {
+		sunMode = sun;
+		if (sunMode) {
+			GetComponent<LightableObject> ().removeLightableObject ();
+			Color col = Color.yellow;
+			col.a = 0.5f;
+			GetComponent<SpriteRenderer>().color = col;
+			GetComponent<Movement>().setSpeed(1.6f);
+			myAudio.Stop();
+			myAudio.clip = activatePearl;
+			myAudio.Play();
+		} else {
+			GetComponent<LightableObject> ().addLightableObject ();
+			GetComponent<SpriteRenderer>().color = Color.white;
+			GetComponent<Movement>().setSpeed(1);
+			myAudio.Stop();
+			myAudio.clip = deactivatePearl;
+			myAudio.Play();
 		}
 	}
 
 	protected void OnSunPearl()
 	{
+		if (Input.GetButtonDown ("360_A" + id)) setSunMode(!sunMode);
 		
+		if (sunMode) {
+			Debug.Log("sunMode");
+			bool onLight = false;
+			
+			PolygonCollider2D myMesh = GetComponent<PolygonCollider2D> ();
+			
+			for (int i = 0; i < myMesh.GetTotalPointCount() && !onLight; i++) {
+				Vector2 localPoint = myMesh.points [i];
+				localPoint = localPoint + (localPoint - (Vector2)GetComponent<OffsetPositionObject> ().getOffsetPosition ()).normalized * 0.01f;
+				
+				Vector2 worldPoint = myMesh.transform.TransformPoint (localPoint);
+				
+				Vector3 position = new Vector3 (worldPoint.x, worldPoint.y, LightController.lightPosition - 1);
+				Debug.DrawRay (position, transform.forward * 2);
+				
+				if (Physics.Raycast (position, transform.forward, 20, lightLayer)) onLight = true;
+			}
+			
+			if(!onLight) setSunMode(false);
+
+			
+		}
 	}
 }
