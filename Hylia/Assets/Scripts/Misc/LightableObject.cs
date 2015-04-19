@@ -8,7 +8,8 @@ public class LightableObject : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		if(active) addLightableObject ();
+		active = !active;
+		if(!active) addLightableObject ();
 		else removeLightableObject();
 	}
 
@@ -26,4 +27,5 @@ public class LightableObject : MonoBehaviour {
 		gameObject.layer = 2; //IgnoreRayCast
 		active = false;
 	}
+
 }

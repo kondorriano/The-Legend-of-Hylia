@@ -33,12 +33,12 @@ public class Boomerang : MonoBehaviour {
 			counter += Time.deltaTime;
 			//myRigidbody.velocity += (Vector2) (myPlayer.position-transform.position).normalized*acceleration*Time.deltaTime;
 			if(counter >= 1) state = 2;
-			if(((Vector2)myPlayer.position-(Vector2)transform.position).sqrMagnitude <= 0.1f) Destroy (gameObject);
+			if(((Vector2)myPlayer.position-(Vector2)transform.position).sqrMagnitude <= 0.1f) destroyBoomerang();
 
 		} 
 		if (state == 2) {
 			myRigidbody.velocity = ((Vector2)myPlayer.position-(Vector2)transform.position).normalized*speed;
-			if(((Vector2)myPlayer.position-(Vector2)transform.position).sqrMagnitude <= 0.1f) Destroy (gameObject);
+			if(((Vector2)myPlayer.position-(Vector2)transform.position).sqrMagnitude <= 0.1f) destroyBoomerang();
 		}
 	}
 
@@ -49,5 +49,16 @@ public class Boomerang : MonoBehaviour {
 		endPosition = (Vector2)transform.position+dir*distance;
 		
 		myRigidbody.velocity = dir * speed;
+	}
+
+	void destroyBoomerang() {
+		myPlayer.GetComponent<EquipedItem> ().activateBoomerang ();
+		Destroy (gameObject);
+	}
+
+	void OnTrigerEnter2D(Collider2D c) {
+		if (c.transform.parent == myPlayer && state == 2) {
+			destroyBoomerang();
+		} else if (c.gameObject.tag != "Grabable") state = 2;
 	}
 }

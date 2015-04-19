@@ -9,6 +9,7 @@ public class EquipedItem : MonoBehaviour {
 	public LayerMask lightLayer;
 	private bool moonMode = false;
 	private bool sunMode = false;
+	private bool haveBoomerang = true;
 
 
 	Movement mov;
@@ -59,9 +60,17 @@ public class EquipedItem : MonoBehaviour {
 		
 	}
 
+	public void activateBoomerang () {
+		haveBoomerang = true;
+	}
+
+	public bool getBoomerang () {
+		return haveBoomerang;
+	}
+
 	protected void OnBoomerang()
 	{
-		if (Input.GetButtonDown ("360_A"+id)) {
+		if (Input.GetButtonDown ("360_A"+id) && haveBoomerang) {
 			Vector2 direction = mov.getWalkDirection();
 			Vector2 boomerangDirection = Vector2.zero;
 			Vector3 boomerangPosition = transform.position;
@@ -87,6 +96,8 @@ public class EquipedItem : MonoBehaviour {
 			GameObject item = (GameObject) Instantiate(Items.itemList[(int) myItem].prefab, boomerangPosition, transform.rotation);
 			item.GetComponent<Boomerang>().InitBoomerang(transform, boomerangDirection);
 			item.transform.SetParent(transform.parent);
+
+			haveBoomerang = false;
 		}
 	}
 
@@ -113,7 +124,7 @@ public class EquipedItem : MonoBehaviour {
 		
 	}
 
-	void setMoonMode(bool moon) {
+	public void setMoonMode(bool moon) {
 		moonMode = moon;
 		if (moonMode) {
 			GetComponent<LightableObject> ().removeLightableObject ();
@@ -140,7 +151,6 @@ public class EquipedItem : MonoBehaviour {
 		if (Input.GetButtonDown ("360_A" + id)) setMoonMode(!moonMode);
 
 		if (moonMode) {
-			Debug.Log("MoonMode");
 			bool onShadow = true;
 
 			PolygonCollider2D myMesh = GetComponent<PolygonCollider2D> ();
@@ -163,7 +173,7 @@ public class EquipedItem : MonoBehaviour {
 
 	}
 
-	void setSunMode(bool sun) {
+	public void setSunMode(bool sun) {
 		sunMode = sun;
 		if (sunMode) {
 			GetComponent<LightableObject> ().removeLightableObject ();
@@ -189,7 +199,6 @@ public class EquipedItem : MonoBehaviour {
 		if (Input.GetButtonDown ("360_A" + id)) setSunMode(!sunMode);
 		
 		if (sunMode) {
-			Debug.Log("sunMode");
 			bool onLight = false;
 			
 			PolygonCollider2D myMesh = GetComponent<PolygonCollider2D> ();
