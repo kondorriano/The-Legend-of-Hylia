@@ -56,13 +56,31 @@ public class Boomerang : MonoBehaviour {
 		Destroy (gameObject);
 	}
 
-	void OnTriggerEnter2D(Collider2D c) {
-		Debug.Log(c.gameObject.name);
-		if (c.transform.parent == myPlayer && state == 2) {
-			destroyBoomerang();
-		} else if (c.gameObject.tag != "Grabable" &&
-		           c.gameObject.tag != "Player" &&
-		           c.gameObject.tag != "Player1" &&
-		           c.gameObject.tag != "Player2") state = 2;
+	void OnTriggerEnter2D(Collider2D c) {		 
+
+		if (c.transform.parent == myPlayer || c.transform == myPlayer) {
+			if(state == 2) destroyBoomerang ();
+			return;
+		}
+
+		GrabableItem gI;
+		if (c.gameObject.tag == "PlayerCollider") {
+			gI = c.transform.parent.GetComponent<GrabableItem> ();
+			if(gI != null) {
+				gI.setTarget(transform);
+				state = 2;
+			}
+			return;
+		} 
+
+		gI = c.GetComponent<GrabableItem> ();
+		if (c.gameObject.tag == "Player1" ||
+		    c.gameObject.tag == "Player2") {
+			if(gI != null) {
+				gI.setTarget(transform);
+				state = 2;
+			}			
+		} else if(gI != null) gI.setTarget(transform);
+		else state = 2;
 	}
 }
