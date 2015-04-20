@@ -80,6 +80,10 @@ public class MenuNavigation : MonoBehaviour {
 
 			if(sum != 0) {
 				items[itemSelectedIndex].color = new Color(0.5f,0.5f,0.5f,items[itemSelectedIndex].color.a);
+
+				Items itemsScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<Items>();
+				itemsScript.setItemPreparation((int)menuItems[itemSelectedIndex], transform.parent);
+
 				itemSelectedIndex = (items.Length + itemSelectedIndex + sum)%items.Length;
 				items[itemSelectedIndex].color = new Color(1f,1f,1f,items[itemSelectedIndex].color.a);
 

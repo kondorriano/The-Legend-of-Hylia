@@ -125,6 +125,7 @@ public class EquipedItem : MonoBehaviour {
 	}
 
 	public void setMoonMode(bool moon) {
+		if(moonMode == moon) return;
 		moonMode = moon;
 		if (moonMode) {
 			GetComponent<LightableObject> ().removeLightableObject ();
@@ -174,6 +175,8 @@ public class EquipedItem : MonoBehaviour {
 	}
 
 	public void setSunMode(bool sun) {
+		if(sunMode == sun) return;
+
 		sunMode = sun;
 		if (sunMode) {
 			GetComponent<LightableObject> ().removeLightableObject ();

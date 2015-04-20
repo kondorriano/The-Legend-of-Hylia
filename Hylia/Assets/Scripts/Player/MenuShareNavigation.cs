@@ -16,14 +16,6 @@ public class MenuShareNavigation : MonoBehaviour {
 	AudioSource myAudio;
 	private int id;
 
-	protected delegate void TypeCallback(); 
-	protected TypeCallback[] itemConditionCallbacks = new TypeCallback[(int) Items.ItemType.Length];
-	protected TypeCallback[] itemPreparationCallbacks = new TypeCallback[(int) Items.ItemType.Length];
-
-	bool condition;
-	Transform player;
-
-
 	void setId(int myId) {
 		id = myId;
 	}
@@ -36,7 +28,6 @@ public class MenuShareNavigation : MonoBehaviour {
 
 		menu = GetComponent<MenuNavigation> ();
 		otherMenu = GameObject.FindGameObjectWithTag ("Player" + ((id%2)+1)).transform.Find("Canvas").GetComponent<MenuNavigation>();
-		InitCallBacks ();
 
 	}
 	
@@ -52,27 +43,14 @@ public class MenuShareNavigation : MonoBehaviour {
 
 		if (Input.GetButtonDown ("360_Y" + id)) {
 			if(menu.isActive() && otherMenu.isActive() && GetComponent<MenusControl>().isActiveShare()) {
-				condition = false;
+				Items itemsScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<Items>();
 
-				player = menu.transform.parent;
-				TypeCallback callback = itemConditionCallbacks [myId];
-				if (callback != null) callback();
-				bool condition1 = condition;
-
-				player = otherMenu.transform.parent;
-				callback = itemConditionCallbacks [otherId];
-				if (callback != null) callback();
-				bool condition2 = condition;
+				bool condition1 = itemsScript.getItemCondition(myId, menu.transform.parent);
+				bool condition2 = itemsScript.getItemCondition(otherId, otherMenu.transform.parent);
 
 				if(condition1 && condition2) {
-					player = menu.transform.parent;
-					callback = itemPreparationCallbacks [myId];
-					if (callback != null) callback();
-
-					player = otherMenu.transform.parent;
-					callback = itemPreparationCallbacks [otherId];
-					if (callback != null) callback();
-
+					itemsScript.setItemPreparation(myId, menu.transform.parent);
+					itemsScript.setItemPreparation(otherId, otherMenu.transform.parent);
 
 					menu.setItemSelectedId(otherId);
 					otherMenu.setItemSelectedId(myId);
@@ -84,92 +62,5 @@ public class MenuShareNavigation : MonoBehaviour {
 				}
 			}
 		}
-
-
 	}
-
-	void InitCallBacks () {
-		for (int i = 0; i < itemConditionCallbacks.Length; i++) {
-			itemConditionCallbacks [i] = null;
-			itemPreparationCallbacks [i] = null;
-		}
-		
-		itemConditionCallbacks[(int)Items.ItemType.None] = new TypeCallback(NoneCondition);
-		itemConditionCallbacks[(int)Items.ItemType.Boomerang] = new TypeCallback(BoomerangCondition);
-		itemConditionCallbacks[(int)Items.ItemType.Bombs] = new TypeCallback(BombsCondition);
-		itemConditionCallbacks[(int)Items.ItemType.Bow] = new TypeCallback(BowCondition);
-		itemConditionCallbacks[(int)Items.ItemType.MirrorShield] = new TypeCallback(MirrorShieldCondition);
-		itemConditionCallbacks[(int)Items.ItemType.MoonPearl] = new TypeCallback(MoonPearlCondition);
-		itemConditionCallbacks[(int)Items.ItemType.SunPearl] = new TypeCallback(SunPearlCondition);
-
-		itemPreparationCallbacks[(int)Items.ItemType.None] = new TypeCallback(NonePreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.Boomerang] = new TypeCallback(BoomerangPreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.Bombs] = new TypeCallback(BombsPreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.Bow] = new TypeCallback(BowPreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.MirrorShield] = new TypeCallback(MirrorShieldPreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.MoonPearl] = new TypeCallback(MoonPearlPreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.SunPearl] = new TypeCallback(SunPearlPreparation);
-	}
-
-	protected void NoneCondition()
-	{
-		condition = false;
-	}
-	protected void BoomerangCondition()
-	{
-		condition = player.GetComponent<EquipedItem> ().getBoomerang ();
-	}
-	protected void BombsCondition()
-	{
-		condition = true;
-	}
-	protected void BowCondition()
-	{
-		condition = true;
-	}
-	protected void MirrorShieldCondition()
-	{
-		condition = true;
-	}
-	protected void MoonPearlCondition()
-	{
-		condition = true;
-	}
-	protected void SunPearlCondition()
-	{
-		condition = true;
-	}
-
-
-
-	protected void NonePreparation()
-	{
-		
-	}
-	protected void BoomerangPreparation()
-	{
-		
-	}
-	protected void BombsPreparation()
-	{
-		
-	}
-	protected void BowPreparation()
-	{
-		
-	}
-	protected void MirrorShieldPreparation()
-	{
-		
-	}
-	protected void MoonPearlPreparation()
-	{
-		player.GetComponent<EquipedItem> ().setMoonMode (false);
-	}
-	protected void SunPearlPreparation()
-	{
-		player.GetComponent<EquipedItem> ().setSunMode (false);
-	}
-
-
 }
