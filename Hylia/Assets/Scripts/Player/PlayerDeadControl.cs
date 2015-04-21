@@ -19,6 +19,11 @@ public class PlayerDeadControl : MonoBehaviour {
 	Animator anim;
 	AudioSource myAudio;
 
+	private int id;
+
+	void setId(int myId) {
+		id = myId;
+	}
 
 
 	// Use this for initialization
@@ -33,7 +38,9 @@ public class PlayerDeadControl : MonoBehaviour {
 
 	void Update() {
 		if (dead) {
-			counter -= Time.deltaTime;
+			if (Input.GetButtonDown ("360_A"+id) ) counter = (int) counter;
+			else counter -= Time.deltaTime;
+		
 			deathCounter.text = "" + ((int)counter / 10) + "" + ((int)counter % 10);
 
 			if(counter <= 0) {
@@ -41,6 +48,7 @@ public class PlayerDeadControl : MonoBehaviour {
 				SecondMenuController smc = transform.Find("StuffCanvas").GetComponent<SecondMenuController>();
 				smc.addLifePoints(smc.getMaxLifePoints());
 				transform.position = respawnPoint.position;
+				Camera.main.GetComponent<CameraDivisionEffect>().setRespawn();
 				//Respawn
 
 			}

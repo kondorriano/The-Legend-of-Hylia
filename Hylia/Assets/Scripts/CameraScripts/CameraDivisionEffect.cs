@@ -16,9 +16,17 @@ public class CameraDivisionEffect : MonoBehaviour {
 	bool renderMainCamera = true;
 	bool move1 = true;
 	bool move2 = true;
+	bool respawn = false;
+	int respawnCounter = 0;
+
+	public void setRespawn(){
+		respawn = true;
+		respawnCounter = 2;
+	}
 
 	public float cameraVelocity = 10f;
 	private Vector2 screenSize = new Vector2(0, 0);
+
 
 	void Start () {
 		updateTextures ();
@@ -34,6 +42,12 @@ public class CameraDivisionEffect : MonoBehaviour {
 	}
 
 	void Update () {
+		if (respawn) {
+			--respawnCounter;
+			if (respawnCounter <= 0)
+				respawn = false;
+		}
+
 		Vector2 currentScreenSize = new Vector2(Screen.width, Screen.height);
 		if(currentScreenSize != screenSize) updateTextures();
 
@@ -47,14 +61,18 @@ public class CameraDivisionEffect : MonoBehaviour {
 		if ((Mathf.Abs (direction.x) < Camera.main.aspect * 2f * Camera.main.orthographicSize * 0.5f) &&
 			(Mathf.Abs (direction.y) < 2f * Camera.main.orthographicSize * 0.5f)) {
 			if(!renderMainCamera) {
-				move1 = true;
-				move2 = true;
+				if(!respawn) {
+					move1 = true;
+					move2 = true;
+				} else respawn = false;
 			}
 			renderMainCamera = true;
 		} else {
 			if(renderMainCamera) {
-				move1 = true;
-				move2 = true;
+				if(!respawn) {
+					move1 = true;
+					move2 = true;
+				} else respawn = false;
 			}
 			renderMainCamera = false;
 		}
