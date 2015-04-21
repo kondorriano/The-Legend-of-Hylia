@@ -77,6 +77,14 @@ public class SecondMenuController : MonoBehaviour {
 		}
 	}
 
+	public int getLifePoints() {
+		return lifePoints;
+	}
+
+	public int getMaxLifePoints() {
+		return hearts * 4;
+	}
+
 	void InitMagic(){
 		magicBar = transform.Find ("MagicBar").GetComponent<Image> ();
 		magicPoints = magic;
