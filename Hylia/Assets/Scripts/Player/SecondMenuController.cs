@@ -69,6 +69,8 @@ public class SecondMenuController : MonoBehaviour {
 		lifePoints = Mathf.Clamp (lifePoints, 0, hearts * 4);
 		updateHearts ();
 
+		transform.parent.GetComponent<PlayerDeadControl>().setDead(lifePoints);
+
 		if (!active) {
 			active = true;
 			counter = showHeartsTime;

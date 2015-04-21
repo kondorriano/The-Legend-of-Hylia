@@ -33,6 +33,11 @@ public class Movement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (GetComponent<PlayerDeadControl> ().getDead ()) {
+			looking = LookDirection.Up;
+			return;
+		}
+
 		bool up = false;
 		bool down = false;
 		bool right = false;
@@ -73,21 +78,11 @@ public class Movement : MonoBehaviour {
 		//Movement
 		myRigidbody.velocity = new Vector2 (xAxis, yAxis)*speed;
 		//Animations
-		//invertScale (left);
 
 		anim.SetBool ("Up", up);
 		anim.SetBool ("Down", down);
 		anim.SetBool ("Left", left);
 		anim.SetBool ("Right", right);
-	}
-
-	void invertScale(bool left) {
-		float x;
-		if(left) x = Mathf.Abs(transform.localScale.x) * -1;
-		else x = Mathf.Abs(transform.localScale.x);
-		
-		transform.localScale = new Vector3 (x, transform.localScale.y, transform.localScale.z);		
-
 	}
 
 	public LookDirection getLooking() {

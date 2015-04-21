@@ -36,6 +36,12 @@ public class EquipedItem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (GetComponent<PlayerDeadControl> ().getDead ()) {
+			setMoonMode(false);
+			setSunMode(false);
+			return;
+		}
+
 		myItem = (Items.ItemType) menu.getItemEquipedId ();
 
 		TypeCallback callback = typeCallbacks [(int) myItem];
