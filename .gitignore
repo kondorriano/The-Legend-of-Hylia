@@ -14,9 +14,9 @@ Desktop.ini
 
 #Unity3D ignores
 
-Hylia/[Ll]ibrary/
-Hylia/[Tt]emp/
-Hylia/[Oo]bj/
+/Hylia/[Ll]ibrary/
+/Hylia/[Tt]emp/
+/Hylia/[Oo]bj/
 
 *.tmproj
 *.csproj
@@ -26,3 +26,11 @@ Hylia/[Oo]bj/
 *.user
 *.pidb
 *.userprefs
+*.tmp
+*.booproj
+
+# Unity3D generated meta files
+*.pidb.meta
+
+# Unity3D Generated File On Crash Reports
+sysinfo.txt
