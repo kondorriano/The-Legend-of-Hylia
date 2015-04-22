@@ -106,6 +106,10 @@ public class SecondMenuController : MonoBehaviour {
 		}
 	}
 
+	public int getMagicPoints() {
+		return magicPoints;
+	}
+
 	void InitKeys() {
 		keyNumber = transform.Find ("KeyNumber").GetComponent<Text> ();
 	}

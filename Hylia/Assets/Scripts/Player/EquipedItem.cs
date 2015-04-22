@@ -9,11 +9,16 @@ public class EquipedItem : MonoBehaviour {
 	public LayerMask lightLayer;
 	private bool moonMode = false;
 	private bool sunMode = false;
+	public float pearlUseTime = 0.4f;
+	float pearlCounter = 0;
+
 	private bool haveBoomerang = true;
 
 
 	Movement mov;
 	MenuNavigation menu;
+	SecondMenuController menu2;
+
 	AudioSource myAudio;
 	Items.ItemType myItem;
 	private int id;
@@ -29,6 +34,8 @@ public class EquipedItem : MonoBehaviour {
 	void Start () {
 		mov = GetComponent<Movement> ();
 		menu = transform.Find ("Canvas").GetComponent<MenuNavigation> ();
+		menu2 = transform.Find ("StuffCanvas").GetComponent<SecondMenuController> ();
+
 		myAudio = GetComponent<AudioSource> ();
 		InitCallBacks ();
 
@@ -130,10 +137,19 @@ public class EquipedItem : MonoBehaviour {
 		
 	}
 
+	public bool getMoonMode() {
+		return moonMode;
+	}
+
 	public void setMoonMode(bool moon) {
 		if(moonMode == moon) return;
 		moonMode = moon;
+		if (menu2.getMagicPoints () <= 0) moonMode = false;
+
 		if (moonMode) {
+			menu2.addMagicPoints(-5);
+			pearlCounter = pearlUseTime;
+
 			GetComponent<LightableObject> ().removeLightableObject ();
 			Color col = Color.black;
 			col.a = 0.5f;
@@ -158,6 +174,13 @@ public class EquipedItem : MonoBehaviour {
 		if (Input.GetButtonDown ("360_A" + id)) setMoonMode(!moonMode);
 
 		if (moonMode) {
+
+			pearlCounter -= Time.deltaTime;
+			if(pearlCounter <= 0) {
+				menu2.addMagicPoints(-2);
+				pearlCounter += pearlUseTime;
+			}
+
 			bool onShadow = true;
 
 			PolygonCollider2D myMesh = GetComponent<PolygonCollider2D> ();
@@ -175,16 +198,27 @@ public class EquipedItem : MonoBehaviour {
 			}
 
 			if(!onShadow) setMoonMode(false);
+			if (menu2.getMagicPoints () <= 0) setMoonMode(false);
+
 
 		}
 
 	}
 
+	public bool getSunMode() {
+		return sunMode;
+	}
+
 	public void setSunMode(bool sun) {
 		if(sunMode == sun) return;
-
 		sunMode = sun;
+
+		if (menu2.getMagicPoints () <= 0) sunMode = false;
+
 		if (sunMode) {
+			menu2.addMagicPoints(-5);
+			pearlCounter = pearlUseTime;
+
 			GetComponent<LightableObject> ().removeLightableObject ();
 			Color col = Color.yellow;
 			col.a = 0.5f;
@@ -208,6 +242,13 @@ public class EquipedItem : MonoBehaviour {
 		if (Input.GetButtonDown ("360_A" + id)) setSunMode(!sunMode);
 		
 		if (sunMode) {
+
+			pearlCounter -= Time.deltaTime;
+			if(pearlCounter <= 0) {
+				menu2.addMagicPoints(-2);
+				pearlCounter += pearlUseTime;
+			}
+
 			bool onLight = false;
 			
 			PolygonCollider2D myMesh = GetComponent<PolygonCollider2D> ();
@@ -225,6 +266,8 @@ public class EquipedItem : MonoBehaviour {
 			}
 			
 			if(!onLight) setSunMode(false);
+			if (menu2.getMagicPoints () <= 0) setSunMode(false);
+
 
 			
 		}

@@ -13,7 +13,7 @@ public abstract class HitEvent : MonoBehaviour {
 	
 	}
 
-	public virtual void hurt(int damage, Vector2 force) {
+	public virtual void hurt(int damage, Vector2 force, EnemyHit.EnemyAreaType area) {
 
 	}
 

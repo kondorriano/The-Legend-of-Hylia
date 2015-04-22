@@ -13,7 +13,7 @@ public class EnemyHurt : HitEvent {
 	
 	}
 
-	public override void hurt(int damage, Vector2 force) {
+	public override void hurt(int damage, Vector2 force, EnemyHit.EnemyAreaType area) {
 
 	}
 }

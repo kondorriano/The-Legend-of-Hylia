@@ -14,6 +14,7 @@ public class PlayerHurt : HitEvent {
 	Vector2 knockbackForce;
 
 	SecondMenuController menu;
+	EquipedItem item;
 	AudioSource myAudio;
 
 
@@ -21,7 +22,8 @@ public class PlayerHurt : HitEvent {
 	// Use this for initialization
 	void Start () {
 		menu = transform.Find ("StuffCanvas").GetComponent<SecondMenuController> ();
-		
+		item = GetComponent<EquipedItem> ();
+
 		myAudio = GetComponent<AudioSource> ();
 	}
 	
@@ -48,8 +50,15 @@ public class PlayerHurt : HitEvent {
 		}
 	}
 
-	public override void hurt(int damage, Vector2 force) {
+	public override void hurt(int damage, Vector2 force, EnemyHit.EnemyAreaType area) {
 		if(hurted) return;
+
+		if ((area == EnemyHit.EnemyAreaType.Normal || area == EnemyHit.EnemyAreaType.Sun || area == EnemyHit.EnemyAreaType.NotMoon) && item.getMoonMode()) return;
+		if ((area == EnemyHit.EnemyAreaType.Normal || area == EnemyHit.EnemyAreaType.Moon || area == EnemyHit.EnemyAreaType.NotSun) && item.getSunMode()) return;
+		if ((area == EnemyHit.EnemyAreaType.Sun || area == EnemyHit.EnemyAreaType.Moon || area == EnemyHit.EnemyAreaType.NotNormal) 
+			&& !item.getMoonMode () && !item.getSunMode ())	return;
+
+
 		myAudio.Stop();
 		myAudio.clip = hurtAudio;
 		myAudio.Play();
