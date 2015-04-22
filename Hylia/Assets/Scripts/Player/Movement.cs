@@ -35,6 +35,15 @@ public class Movement : MonoBehaviour {
 	void Update () {
 		if (GetComponent<PlayerDeadControl> ().getDead ()) {
 			looking = LookDirection.Up;
+			myRigidbody.velocity = Vector2.zero;
+			return;
+		}
+
+		if (GetComponent<PlayerHurt> ().getHurted ()) {
+			anim.SetBool ("Up", false);
+			anim.SetBool ("Down", false);
+			anim.SetBool ("Left", false);
+			anim.SetBool ("Right", false);
 			return;
 		}
 

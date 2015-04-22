@@ -58,21 +58,21 @@ public class Items : MonoBehaviour {
 			itemPreparationCallbacks [i] = null;
 		}
 		
-		itemConditionCallbacks[(int)Items.ItemType.None] = new TypeCallback(NoneCondition);
-		itemConditionCallbacks[(int)Items.ItemType.Boomerang] = new TypeCallback(BoomerangCondition);
-		itemConditionCallbacks[(int)Items.ItemType.Bombs] = new TypeCallback(BombsCondition);
-		itemConditionCallbacks[(int)Items.ItemType.Bow] = new TypeCallback(BowCondition);
-		itemConditionCallbacks[(int)Items.ItemType.MirrorShield] = new TypeCallback(MirrorShieldCondition);
-		itemConditionCallbacks[(int)Items.ItemType.MoonPearl] = new TypeCallback(MoonPearlCondition);
-		itemConditionCallbacks[(int)Items.ItemType.SunPearl] = new TypeCallback(SunPearlCondition);
+		itemConditionCallbacks[(int)ItemType.None] = new TypeCallback(NoneCondition);
+		itemConditionCallbacks[(int)ItemType.Boomerang] = new TypeCallback(BoomerangCondition);
+		itemConditionCallbacks[(int)ItemType.Bombs] = new TypeCallback(BombsCondition);
+		itemConditionCallbacks[(int)ItemType.Bow] = new TypeCallback(BowCondition);
+		itemConditionCallbacks[(int)ItemType.MirrorShield] = new TypeCallback(MirrorShieldCondition);
+		itemConditionCallbacks[(int)ItemType.MoonPearl] = new TypeCallback(MoonPearlCondition);
+		itemConditionCallbacks[(int)ItemType.SunPearl] = new TypeCallback(SunPearlCondition);
 
-		itemPreparationCallbacks[(int)Items.ItemType.None] = new TypeCallback(NonePreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.Boomerang] = new TypeCallback(BoomerangPreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.Bombs] = new TypeCallback(BombsPreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.Bow] = new TypeCallback(BowPreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.MirrorShield] = new TypeCallback(MirrorShieldPreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.MoonPearl] = new TypeCallback(MoonPearlPreparation);
-		itemPreparationCallbacks[(int)Items.ItemType.SunPearl] = new TypeCallback(SunPearlPreparation);
+		itemPreparationCallbacks[(int)ItemType.None] = new TypeCallback(NonePreparation);
+		itemPreparationCallbacks[(int)ItemType.Boomerang] = new TypeCallback(BoomerangPreparation);
+		itemPreparationCallbacks[(int)ItemType.Bombs] = new TypeCallback(BombsPreparation);
+		itemPreparationCallbacks[(int)ItemType.Bow] = new TypeCallback(BowPreparation);
+		itemPreparationCallbacks[(int)ItemType.MirrorShield] = new TypeCallback(MirrorShieldPreparation);
+		itemPreparationCallbacks[(int)ItemType.MoonPearl] = new TypeCallback(MoonPearlPreparation);
+		itemPreparationCallbacks[(int)ItemType.SunPearl] = new TypeCallback(SunPearlPreparation);
 	}
 	
 	protected void NoneCondition()
