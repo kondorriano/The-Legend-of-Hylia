@@ -47,6 +47,7 @@ public class PlayerDeadControl : MonoBehaviour {
 				//mirar si rupias?
 				SecondMenuController smc = transform.Find("StuffCanvas").GetComponent<SecondMenuController>();
 				smc.addLifePoints(smc.getMaxLifePoints());
+				GetComponent<GrabableItem>().setTarget(null);
 				transform.position = respawnPoint.position;
 				Camera.main.GetComponent<CameraDivisionEffect>().setRespawn();
 				//Respawn
