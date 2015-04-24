@@ -12,6 +12,7 @@ public class Movement : MonoBehaviour {
 
 	public float initialSpeed = 7f;
 	private float speed;
+	private float enviromentSpeed = 1;
 	private int id;
 	bool movingLastFrame = false;
 	Animator anim;
@@ -85,7 +86,7 @@ public class Movement : MonoBehaviour {
 		movingLastFrame = isMoving;
 
 		//Movement
-		myRigidbody.velocity = new Vector2 (xAxis, yAxis)*speed;
+		myRigidbody.velocity = new Vector2 (xAxis, yAxis)*speed*enviromentSpeed;
 		//Animations
 
 		anim.SetBool ("Up", up);
@@ -104,5 +105,16 @@ public class Movement : MonoBehaviour {
 
 	public void setSpeed(float multiplier) {
 		speed = initialSpeed * multiplier;
+	}
+
+	public void setEnviromentSpeed(float multiplier, EnemyHit.EnemyAreaType area) {
+		EquipedItem item = GetComponent<EquipedItem> ();
+
+		if ((area == EnemyHit.EnemyAreaType.Normal || area == EnemyHit.EnemyAreaType.Sun || area == EnemyHit.EnemyAreaType.NotMoon) && item.getMoonMode()) return;
+		if ((area == EnemyHit.EnemyAreaType.Normal || area == EnemyHit.EnemyAreaType.Moon || area == EnemyHit.EnemyAreaType.NotSun) && item.getSunMode()) return;
+		if ((area == EnemyHit.EnemyAreaType.Sun || area == EnemyHit.EnemyAreaType.Moon || area == EnemyHit.EnemyAreaType.NotNormal) 
+		    && !item.getMoonMode () && !item.getSunMode ())	return;
+
+		enviromentSpeed = multiplier;
 	}
 }

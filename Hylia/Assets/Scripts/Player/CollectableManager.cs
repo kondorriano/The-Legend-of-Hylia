@@ -18,6 +18,7 @@ public class CollectableManager : MonoBehaviour {
 	protected TypeCallback[] addCollectableCallbacks = new TypeCallback[(int) CollectableItem.CollectableType.Length];
 
 	int quantity;
+	float magicCounter = 0;
 	// Use this for initialization
 	void Start () {
 		menu = transform.Find ("StuffCanvas").GetComponent<SecondMenuController> ();
@@ -95,5 +96,19 @@ public class CollectableManager : MonoBehaviour {
 		TypeCallback callback = addCollectableCallbacks [id];
 		if (callback != null) callback();
 	}
+
+	public void addMagicThroughTime(int id, int itemQuantity, float time) {
+		if(magicCounter > 0) return;
+		quantity = itemQuantity;		
+		AddMagic ();
+		magicCounter = time;
+	}
+
+	void Update() {
+		if (magicCounter > 0) {
+			magicCounter -= Time.deltaTime;
+		}
+	}
+
 
 }
