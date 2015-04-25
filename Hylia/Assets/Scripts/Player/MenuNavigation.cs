@@ -8,7 +8,7 @@ public class MenuNavigation : MonoBehaviour {
 	public AudioClip popOut;
 	public AudioClip moveCursor;
 
-	public Items.ItemType[] menuItems;
+	public Utils.ItemType[] menuItems;
 
 
 	int itemSelectedIndex = 0;
@@ -114,11 +114,11 @@ public class MenuNavigation : MonoBehaviour {
 	}
 
 	public int getItemSelectedId() {
-		return (active) ? (int) menuItems[itemSelectedIndex] : (int) Items.ItemType.None;
+		return (active) ? (int) menuItems[itemSelectedIndex] : (int) Utils.ItemType.None;
 	}
 
 	public void setItemSelectedId(int itemId) {	
-		menuItems [itemSelectedIndex] = (Items.ItemType) itemId;
+		menuItems [itemSelectedIndex] = (Utils.ItemType) itemId;
 		items[itemSelectedIndex].sprite = Items.itemList[itemId].menuSprite;
 		Color col = items [itemSelectedIndex].color;
 		col.a = (items[itemSelectedIndex].sprite == null) ? 0 : 1;

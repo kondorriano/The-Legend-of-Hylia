@@ -3,16 +3,7 @@ using System.Collections;
 
 public class Items : MonoBehaviour {
 
-	public enum ItemType {
-		None = 0,
-		Boomerang = 1,
-		Bombs = 2,
-		Bow = 3,
-		MirrorShield = 4,
-		MoonPearl = 5,
-		SunPearl = 6,
-		Length = 7		
-	}
+
 
 	[System.Serializable]
 	public class Item	{
@@ -30,14 +21,14 @@ public class Items : MonoBehaviour {
 	private string spritePath = "";
 
 
-	public static Item[] itemList = new Item[(int) ItemType.Length];
+	public static Item[] itemList = new Item[(int) Utils.ItemType.Length];
 
 	bool condition;
 	Transform player;
 
 	protected delegate void TypeCallback(); 
-	protected TypeCallback[] itemConditionCallbacks = new TypeCallback[(int) ItemType.Length];
-	protected TypeCallback[] itemPreparationCallbacks = new TypeCallback[(int) ItemType.Length];
+	protected TypeCallback[] itemConditionCallbacks = new TypeCallback[(int) Utils.ItemType.Length];
+	protected TypeCallback[] itemPreparationCallbacks = new TypeCallback[(int) Utils.ItemType.Length];
 
 	void Awake() {
 		itemList[0] = new Item (Resources.Load<Sprite> (spritePath + "None"), Resources.Load<GameObject> (prefabPath + "None"));
@@ -58,21 +49,21 @@ public class Items : MonoBehaviour {
 			itemPreparationCallbacks [i] = null;
 		}
 		
-		itemConditionCallbacks[(int)ItemType.None] = new TypeCallback(NoneCondition);
-		itemConditionCallbacks[(int)ItemType.Boomerang] = new TypeCallback(BoomerangCondition);
-		itemConditionCallbacks[(int)ItemType.Bombs] = new TypeCallback(BombsCondition);
-		itemConditionCallbacks[(int)ItemType.Bow] = new TypeCallback(BowCondition);
-		itemConditionCallbacks[(int)ItemType.MirrorShield] = new TypeCallback(MirrorShieldCondition);
-		itemConditionCallbacks[(int)ItemType.MoonPearl] = new TypeCallback(MoonPearlCondition);
-		itemConditionCallbacks[(int)ItemType.SunPearl] = new TypeCallback(SunPearlCondition);
+		itemConditionCallbacks[(int)Utils.ItemType.None] = new TypeCallback(NoneCondition);
+		itemConditionCallbacks[(int)Utils.ItemType.Boomerang] = new TypeCallback(BoomerangCondition);
+		itemConditionCallbacks[(int)Utils.ItemType.Bombs] = new TypeCallback(BombsCondition);
+		itemConditionCallbacks[(int)Utils.ItemType.Bow] = new TypeCallback(BowCondition);
+		itemConditionCallbacks[(int)Utils.ItemType.MirrorShield] = new TypeCallback(MirrorShieldCondition);
+		itemConditionCallbacks[(int)Utils.ItemType.MoonPearl] = new TypeCallback(MoonPearlCondition);
+		itemConditionCallbacks[(int)Utils.ItemType.SunPearl] = new TypeCallback(SunPearlCondition);
 
-		itemPreparationCallbacks[(int)ItemType.None] = new TypeCallback(NonePreparation);
-		itemPreparationCallbacks[(int)ItemType.Boomerang] = new TypeCallback(BoomerangPreparation);
-		itemPreparationCallbacks[(int)ItemType.Bombs] = new TypeCallback(BombsPreparation);
-		itemPreparationCallbacks[(int)ItemType.Bow] = new TypeCallback(BowPreparation);
-		itemPreparationCallbacks[(int)ItemType.MirrorShield] = new TypeCallback(MirrorShieldPreparation);
-		itemPreparationCallbacks[(int)ItemType.MoonPearl] = new TypeCallback(MoonPearlPreparation);
-		itemPreparationCallbacks[(int)ItemType.SunPearl] = new TypeCallback(SunPearlPreparation);
+		itemPreparationCallbacks[(int)Utils.ItemType.None] = new TypeCallback(NonePreparation);
+		itemPreparationCallbacks[(int)Utils.ItemType.Boomerang] = new TypeCallback(BoomerangPreparation);
+		itemPreparationCallbacks[(int)Utils.ItemType.Bombs] = new TypeCallback(BombsPreparation);
+		itemPreparationCallbacks[(int)Utils.ItemType.Bow] = new TypeCallback(BowPreparation);
+		itemPreparationCallbacks[(int)Utils.ItemType.MirrorShield] = new TypeCallback(MirrorShieldPreparation);
+		itemPreparationCallbacks[(int)Utils.ItemType.MoonPearl] = new TypeCallback(MoonPearlPreparation);
+		itemPreparationCallbacks[(int)Utils.ItemType.SunPearl] = new TypeCallback(SunPearlPreparation);
 	}
 	
 	protected void NoneCondition()

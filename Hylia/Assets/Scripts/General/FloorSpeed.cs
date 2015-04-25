@@ -4,7 +4,7 @@ using System.Collections;
 public class FloorSpeed : MonoBehaviour {
 
 	public float multiplierSpeed = 0.75f;
-	public EnemyHit.EnemyAreaType areaReach = EnemyHit.EnemyAreaType.All;
+	public Utils.EnemyAreaType areaReach = Utils.EnemyAreaType.All;
 
 
 
@@ -34,7 +34,7 @@ public class FloorSpeed : MonoBehaviour {
 		
 		if (c.gameObject.tag == "Player1" || c.gameObject.tag == "Player2") {
 			
-			c.GetComponent<Movement> ().setEnviromentSpeed  (1, EnemyHit.EnemyAreaType.All);
+			c.GetComponent<Movement> ().setEnviromentSpeed  (1, Utils.EnemyAreaType.All);
 			
 		}
 		

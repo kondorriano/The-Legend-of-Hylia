@@ -20,11 +20,11 @@ public class EquipedItem : MonoBehaviour {
 	SecondMenuController menu2;
 
 	AudioSource myAudio;
-	Items.ItemType myItem;
+	Utils.ItemType myItem;
 	private int id;
 
 	protected delegate void TypeCallback(); 
-	protected TypeCallback[] typeCallbacks = new TypeCallback[(int) Items.ItemType.Length];
+	protected TypeCallback[] typeCallbacks = new TypeCallback[(int) Utils.ItemType.Length];
 
 	void setId(int myId) {
 		id = myId;
@@ -49,7 +49,7 @@ public class EquipedItem : MonoBehaviour {
 			return;
 		}
 
-		myItem = (Items.ItemType) menu.getItemEquipedId ();
+		myItem = (Utils.ItemType) menu.getItemEquipedId ();
 
 		TypeCallback callback = typeCallbacks [(int) myItem];
 		if (callback != null) callback();
@@ -59,13 +59,13 @@ public class EquipedItem : MonoBehaviour {
 		for (int i = 0; i < typeCallbacks.Length; i++)
 			typeCallbacks[i] = null;
 		
-		typeCallbacks[(int)Items.ItemType.None] = new TypeCallback(OnNone);
-		typeCallbacks[(int)Items.ItemType.Boomerang] = new TypeCallback(OnBoomerang);
-		typeCallbacks[(int)Items.ItemType.Bombs] = new TypeCallback(OnBombs);
-		typeCallbacks[(int)Items.ItemType.Bow] = new TypeCallback(OnBow);
-		typeCallbacks[(int)Items.ItemType.MirrorShield] = new TypeCallback(OnMirrorShield);
-		typeCallbacks[(int)Items.ItemType.MoonPearl] = new TypeCallback(OnMoonPearl);
-		typeCallbacks[(int)Items.ItemType.SunPearl] = new TypeCallback(OnSunPearl);
+		typeCallbacks[(int)Utils.ItemType.None] = new TypeCallback(OnNone);
+		typeCallbacks[(int)Utils.ItemType.Boomerang] = new TypeCallback(OnBoomerang);
+		typeCallbacks[(int)Utils.ItemType.Bombs] = new TypeCallback(OnBombs);
+		typeCallbacks[(int)Utils.ItemType.Bow] = new TypeCallback(OnBow);
+		typeCallbacks[(int)Utils.ItemType.MirrorShield] = new TypeCallback(OnMirrorShield);
+		typeCallbacks[(int)Utils.ItemType.MoonPearl] = new TypeCallback(OnMoonPearl);
+		typeCallbacks[(int)Utils.ItemType.SunPearl] = new TypeCallback(OnSunPearl);
 	}
 
 	protected void OnNone()

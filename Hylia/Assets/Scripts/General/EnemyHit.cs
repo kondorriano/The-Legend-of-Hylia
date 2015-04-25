@@ -3,27 +3,10 @@ using System.Collections;
 
 public class EnemyHit : MonoBehaviour {
 
-	public enum EnemyHitType {
-		None = 0,
-		Foot = 1,
-		Body = 2,
-		Both = 3	
-	}
-
-	public enum EnemyAreaType {
-		Normal = 0,
-		Sun = 1,
-		Moon = 2,
-		NotNormal = 3,
-		NotSun = 4,
-		NotMoon = 5,
-		All = 6
-	}
-
 	public int power = 4;
 	public float knockback = 5;
-	public EnemyHitType hitReach;
-	public EnemyAreaType areaReach = EnemyAreaType.All;
+	public Utils.EnemyHitType hitReach;
+	public Utils.EnemyAreaType areaReach = Utils.EnemyAreaType.All;
 
 
 
@@ -31,12 +14,12 @@ public class EnemyHit : MonoBehaviour {
 		Vector2 force;
 
 		if (c.gameObject.tag == "PlayerCollider") {
-			if(hitReach == EnemyHitType.Body || hitReach == EnemyHitType.Both) {
+			if(hitReach == Utils.EnemyHitType.Body || hitReach == Utils.EnemyHitType.Both) {
 				force = (Vector2)(c.transform.position-transform.position);
 				c.transform.parent.GetComponent<HitEvent> ().hurt (power, force.normalized*knockback, areaReach);
 			}
 		} else if (c.gameObject.tag == "Player1" || c.gameObject.tag == "Player2") {
-			if(hitReach == EnemyHitType.Foot || hitReach == EnemyHitType.Both) {
+			if(hitReach == Utils.EnemyHitType.Foot || hitReach == Utils.EnemyHitType.Both) {
 				OffsetPositionObject oPO = c.transform.GetComponent<OffsetPositionObject>();
 
 				force = (Vector2)(c.transform.TransformPoint (oPO.getOffsetPosition())-transform.position);
@@ -50,7 +33,7 @@ public class EnemyHit : MonoBehaviour {
 		Vector2 force;
 
 		if (c.gameObject.tag == "Player1" || c.gameObject.tag == "Player2") {
-			if(hitReach == EnemyHitType.Foot || hitReach == EnemyHitType.Both) {
+			if(hitReach == Utils.EnemyHitType.Foot || hitReach == Utils.EnemyHitType.Both) {
 				OffsetPositionObject oPO = c.transform.GetComponent<OffsetPositionObject>();
 				
 				force = (Vector2)(c.transform.TransformPoint (oPO.getOffsetPosition())-transform.position);
@@ -64,12 +47,12 @@ public class EnemyHit : MonoBehaviour {
 		Vector2 force;
 		
 		if (c.gameObject.tag == "PlayerCollider") {
-			if(hitReach == EnemyHitType.Body || hitReach == EnemyHitType.Both) {
+			if(hitReach == Utils.EnemyHitType.Body || hitReach == Utils.EnemyHitType.Both) {
 				force = (Vector2)(c.transform.position-transform.position);
 				c.transform.parent.GetComponent<HitEvent> ().hurt (power, force.normalized*knockback, areaReach);
 			}
 		} else if (c.gameObject.tag == "Player1" || c.gameObject.tag == "Player2") {
-			if(hitReach == EnemyHitType.Foot || hitReach == EnemyHitType.Both) {
+			if(hitReach == Utils.EnemyHitType.Foot || hitReach == Utils.EnemyHitType.Both) {
 				OffsetPositionObject oPO = c.transform.GetComponent<OffsetPositionObject>();
 				
 				force = (Vector2)(c.transform.TransformPoint (oPO.getOffsetPosition())-transform.position);
@@ -83,7 +66,7 @@ public class EnemyHit : MonoBehaviour {
 		Vector2 force;
 		
 		if (c.gameObject.tag == "Player1" || c.gameObject.tag == "Player2") {
-			if(hitReach == EnemyHitType.Foot || hitReach == EnemyHitType.Both) {
+			if(hitReach == Utils.EnemyHitType.Foot || hitReach == Utils.EnemyHitType.Both) {
 				OffsetPositionObject oPO = c.transform.GetComponent<OffsetPositionObject>();
 				
 				force = (Vector2)(c.transform.TransformPoint (oPO.getOffsetPosition())-transform.position);

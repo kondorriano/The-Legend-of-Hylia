@@ -1,34 +1,44 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ButtonSwitch : ButtonPress {
+public class ButtonSwitch : MonoBehaviour {
 
 
-	protected override void OnTriggerEnter2D(Collider2D c) {
-		if (c.gameObject.tag == "Player1" || c.gameObject.tag == "Player2") {
-			EquipedItem item = c.GetComponent<EquipedItem> ();
+	public Utils.EnemyAreaType area = Utils.EnemyAreaType.All;
+	public Utils.ColliderType affectedBy = Utils.ColliderType.All;
+	protected bool active = false;
+	
+	
+	protected void OnTriggerEnter2D(Collider2D c) {
+
+		//Get colliderArea
+		//Get effect
+		/*
+		EquipedItem item = c.GetComponent<EquipedItem> ();
+		if ((area == Utils.EnemyAreaType.Normal || area == Utils.EnemyAreaType.Sun || area == Utils.EnemyAreaType.NotMoon) && item.getMoonMode()) return;
+		if ((area == Utils.EnemyAreaType.Normal || area == Utils.EnemyAreaType.Moon || area == Utils.EnemyAreaType.NotSun) && item.getSunMode()) return;
+		if ((area == Utils.EnemyAreaType.Sun || area == Utils.EnemyAreaType.Moon || area == Utils.EnemyAreaType.NotNormal) 
+		    && !item.getMoonMode () && !item.getSunMode ())	return;
+
+
+		active = !active;
+		GetComponent<Animator> ().SetBool ("Active", active);
+		GetComponent<AudioSource>().Play();
+		activateStuff();
 			
-			if ((area == EnemyHit.EnemyAreaType.Normal || area == EnemyHit.EnemyAreaType.Sun || area == EnemyHit.EnemyAreaType.NotMoon) && item.getMoonMode()) return;
-			if ((area == EnemyHit.EnemyAreaType.Normal || area == EnemyHit.EnemyAreaType.Moon || area == EnemyHit.EnemyAreaType.NotSun) && item.getSunMode()) return;
-			if ((area == EnemyHit.EnemyAreaType.Sun || area == EnemyHit.EnemyAreaType.Moon || area == EnemyHit.EnemyAreaType.NotNormal) 
-			    && !item.getMoonMode () && !item.getSunMode ())	return;
-			
-			active = !active;
-			GetComponent<Animator> ().SetBool ("Active", active);
-			GetComponent<AudioSource>().Play();
-			activateStuff();
-
 		}
+		*/
 		
 	}
 
-	protected override void activateStuff() {
+	void activateStuff() {
 		if (active) {
 
 		} else {
 
 		}
 	}
+
 	
 	
 }

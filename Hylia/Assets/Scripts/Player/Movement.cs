@@ -107,12 +107,12 @@ public class Movement : MonoBehaviour {
 		speed = initialSpeed * multiplier;
 	}
 
-	public void setEnviromentSpeed(float multiplier, EnemyHit.EnemyAreaType area) {
+	public void setEnviromentSpeed(float multiplier, Utils.EnemyAreaType area) {
 		EquipedItem item = GetComponent<EquipedItem> ();
 
-		if ((area == EnemyHit.EnemyAreaType.Normal || area == EnemyHit.EnemyAreaType.Sun || area == EnemyHit.EnemyAreaType.NotMoon) && item.getMoonMode()) return;
-		if ((area == EnemyHit.EnemyAreaType.Normal || area == EnemyHit.EnemyAreaType.Moon || area == EnemyHit.EnemyAreaType.NotSun) && item.getSunMode()) return;
-		if ((area == EnemyHit.EnemyAreaType.Sun || area == EnemyHit.EnemyAreaType.Moon || area == EnemyHit.EnemyAreaType.NotNormal) 
+		if ((area == Utils.EnemyAreaType.Normal || area == Utils.EnemyAreaType.Sun || area == Utils.EnemyAreaType.NotMoon) && item.getMoonMode()) return;
+		if ((area == Utils.EnemyAreaType.Normal || area == Utils.EnemyAreaType.Moon || area == Utils.EnemyAreaType.NotSun) && item.getSunMode()) return;
+		if ((area == Utils.EnemyAreaType.Sun || area == Utils.EnemyAreaType.Moon || area == Utils.EnemyAreaType.NotNormal) 
 		    && !item.getMoonMode () && !item.getSunMode ())	return;
 
 		enviromentSpeed = multiplier;
