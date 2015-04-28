@@ -149,6 +149,7 @@ public class SecondMenuController : MonoBehaviour {
 	
 
 	void Update() {
+		/*
 		if(Input.GetKeyDown(KeyCode.LeftControl)) addMagicPoints(-10);
 		if(Input.GetKeyDown(KeyCode.RightControl)) addMagicPoints(10);
 
@@ -157,6 +158,7 @@ public class SecondMenuController : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.LeftControl)) useKey();
 		if(Input.GetKeyDown(KeyCode.RightControl)) addKey();
+		*/
 
 
 
