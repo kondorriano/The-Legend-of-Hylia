@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ItemHurt : HitEvent {
+public class ActivateEvent : ButtonEvent {
 
 	// Use this for initialization
 	void Start () {
@@ -13,8 +13,7 @@ public class ItemHurt : HitEvent {
 	
 	}
 
-	public override void hurt(int damage, Vector2 force, Utils.EnemyAreaType area) {
+	public override void performEvent() {
 
 	}
-
 }

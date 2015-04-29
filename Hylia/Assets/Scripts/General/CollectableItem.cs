@@ -20,7 +20,7 @@ public class CollectableItem : MonoBehaviour {
 
 	void OnDestroy() {
 		if(target != null) target.GetComponent<CollectableManager>().addCollectable((int) type, quantity);
-		else Debug.Log("Wat");
+		//else Debug.Log("Wat");
 	}
 
 	void OnTriggerEnter2D(Collider2D c) {		 

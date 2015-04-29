@@ -81,6 +81,6 @@ public class Boomerang : MonoBehaviour {
 				state = 2;
 			}			
 		} else if(gI != null) gI.setTarget(transform);
-		else state = 2;
+		else if(!c.isTrigger) state = 2;
 	}
 }
