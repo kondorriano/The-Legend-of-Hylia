@@ -74,6 +74,7 @@ public class Boomerang : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D c) {
 
 		if (c.gameObject.tag == "Shield") {
+			c.GetComponent<AudioSource>().Play();
 			Vector2 direction = ((Vector2)(c.transform.position-c.transform.parent.position)).normalized;
 
 			if(state == 0) changeDirection(direction);
