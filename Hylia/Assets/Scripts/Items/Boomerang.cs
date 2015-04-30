@@ -6,6 +6,7 @@ public class Boomerang : MonoBehaviour {
 	public float rotationSpeed = 800f;
 	public float distance  = 10;
 	public float speed = 10;
+	public float deceleration = 1;
 	
 	int state = 0;
 
@@ -29,7 +30,7 @@ public class Boomerang : MonoBehaviour {
 		}
 
 		if (state == 1) {
-			myRigidbody.velocity = Vector2.Lerp(myRigidbody.velocity, ((Vector2)myPlayer.position-(Vector2)transform.position).normalized*speed, counter);
+			myRigidbody.velocity = Vector2.Lerp(myRigidbody.velocity, ((Vector2)myPlayer.position-(Vector2)transform.position).normalized*speed, counter*deceleration);
 			counter += Time.deltaTime;
 			//myRigidbody.velocity += (Vector2) (myPlayer.position-transform.position).normalized*acceleration*Time.deltaTime;
 			if(counter >= 1) state = 2;
@@ -51,12 +52,34 @@ public class Boomerang : MonoBehaviour {
 		myRigidbody.velocity = dir * speed;
 	}
 
+	void changeDirection(Vector2 dir) {
+		endPosition = (Vector2)transform.position + dir * (endPosition - (Vector2)transform.position).magnitude;
+		myRigidbody.velocity = dir * speed;
+
+	}
+
+	void bounceBoomerang(Vector2 dir) {
+		state = 1;
+		counter = 0;
+		myRigidbody.velocity = dir * myRigidbody.velocity.magnitude*1.5f;
+
+
+	}
+
 	void destroyBoomerang() {
 		myPlayer.GetComponent<EquipedItem> ().activateBoomerang ();
 		Destroy (gameObject);
 	}
 
-	void OnTriggerEnter2D(Collider2D c) {		 
+	void OnTriggerEnter2D(Collider2D c) {
+
+		if (c.gameObject.tag == "Shield") {
+			Vector2 direction = ((Vector2)(c.transform.position-c.transform.parent.position)).normalized;
+
+			if(state == 0) changeDirection(direction);
+			else bounceBoomerang(direction);
+			return;
+		} 
 
 		if (c.transform.parent == myPlayer || c.transform == myPlayer) {
 			if(state == 2) destroyBoomerang ();
