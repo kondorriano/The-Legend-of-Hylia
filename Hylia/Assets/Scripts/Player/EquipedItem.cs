@@ -132,7 +132,33 @@ public class EquipedItem : MonoBehaviour {
 
 	protected void OnBow()
 	{
-		
+		if (Input.GetButtonDown ("360_A"+id) && haveBoomerang) {
+			Vector2 direction = mov.getWalkDirection();
+			Vector2 arrowDirection = Vector2.zero;
+			Vector3 arrowPosition = transform.position;
+			
+			if(direction.magnitude == 0) {
+				Movement.LookDirection dir = mov.getLooking();
+				if(dir == Movement.LookDirection.Up) {
+					arrowDirection = transform.up;
+					arrowPosition += transform.up*0.25f + transform.forward*0.25f;
+				}
+				if(dir == Movement.LookDirection.Down) {
+					arrowDirection = -transform.up;
+					arrowPosition += -transform.up*0.25f - transform.forward*0.25f;
+				}
+				if(dir == Movement.LookDirection.Left)
+					arrowDirection = -transform.right;
+				if(dir == Movement.LookDirection.Right)
+					arrowDirection = transform.right;
+			} else {
+				arrowDirection = direction.normalized;
+			}
+			
+			GameObject item = (GameObject) Instantiate(Items.itemList[(int) myItem].prefab, arrowPosition, transform.rotation);
+			item.GetComponent<Bow>().InitArrow(transform,arrowDirection);
+			item.transform.SetParent(transform.parent);
+		}
 	}
 
 	public void disableShield() {
