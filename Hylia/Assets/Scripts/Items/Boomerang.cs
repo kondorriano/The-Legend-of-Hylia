@@ -61,7 +61,7 @@ public class Boomerang : MonoBehaviour {
 	void bounceBoomerang(Vector2 dir) {
 		state = 1;
 		counter = 0;
-		myRigidbody.velocity = dir * myRigidbody.velocity.magnitude*1.5f;
+		myRigidbody.velocity = dir * Mathf.Min (myRigidbody.velocity.magnitude*1.5f,speed);
 
 
 	}
