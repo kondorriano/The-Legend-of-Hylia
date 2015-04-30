@@ -7,18 +7,23 @@ public class EnemyHit : MonoBehaviour {
 	public float knockback = 5;
 	public Utils.EnemyHitType hitReach;
 	public Utils.EnemyAreaType areaReach = Utils.EnemyAreaType.All;
+	Transform ignoredPlayer;
 
-
+	public void setIgnoredPlayer(Transform player) {
+		ignoredPlayer = player;
+	}
 
 	void OnTriggerEnter2D(Collider2D c) {
 		Vector2 force;
 
 		if (c.gameObject.tag == "PlayerCollider") {
+			if(c.transform.parent == ignoredPlayer) return;
 			if(hitReach == Utils.EnemyHitType.Body || hitReach == Utils.EnemyHitType.Both) {
 				force = (Vector2)(c.transform.position-transform.position);
 				c.transform.parent.GetComponent<HitEvent> ().hurt (power, force.normalized*knockback, areaReach);
 			}
 		} else if (c.gameObject.tag == "Player1" || c.gameObject.tag == "Player2") {
+			if(c.transform == ignoredPlayer) return;
 			if(hitReach == Utils.EnemyHitType.Foot || hitReach == Utils.EnemyHitType.Both) {
 				OffsetPositionObject oPO = c.transform.GetComponent<OffsetPositionObject>();
 
@@ -32,6 +37,7 @@ public class EnemyHit : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D c) {
 		Vector2 force;
 		if (c.collider.gameObject.tag == "Player1" || c.collider.gameObject.tag == "Player2") {
+			if(c.transform == ignoredPlayer) return;
 			if(hitReach == Utils.EnemyHitType.Foot || hitReach == Utils.EnemyHitType.Both) {
 				OffsetPositionObject oPO = c.transform.GetComponent<OffsetPositionObject>();
 				
@@ -46,11 +52,13 @@ public class EnemyHit : MonoBehaviour {
 		Vector2 force;
 		
 		if (c.gameObject.tag == "PlayerCollider") {
+			if(c.transform.parent == ignoredPlayer) return;
 			if(hitReach == Utils.EnemyHitType.Body || hitReach == Utils.EnemyHitType.Both) {
 				force = (Vector2)(c.transform.position-transform.position);
 				c.transform.parent.GetComponent<HitEvent> ().hurt (power, force.normalized*knockback, areaReach);
 			}
 		} else if (c.gameObject.tag == "Player1" || c.gameObject.tag == "Player2") {
+			if(c.transform == ignoredPlayer) return;
 			if(hitReach == Utils.EnemyHitType.Foot || hitReach == Utils.EnemyHitType.Both) {
 				OffsetPositionObject oPO = c.transform.GetComponent<OffsetPositionObject>();
 				
@@ -65,6 +73,7 @@ public class EnemyHit : MonoBehaviour {
 		Vector2 force;
 		
 		if (c.collider.gameObject.tag == "Player1" || c.collider.gameObject.tag == "Player2") {
+			if(c.transform == ignoredPlayer) return;
 			if(hitReach == Utils.EnemyHitType.Foot || hitReach == Utils.EnemyHitType.Both) {
 				OffsetPositionObject oPO = c.transform.GetComponent<OffsetPositionObject>();
 				

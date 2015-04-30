@@ -5,6 +5,7 @@ public class EquipedItem : MonoBehaviour {
 
 	public AudioClip activatePearl;
 	public AudioClip deactivatePearl;
+	public AudioClip dropBomb;
 
 	public LayerMask lightLayer;
 	private bool moonMode = false;
@@ -19,6 +20,7 @@ public class EquipedItem : MonoBehaviour {
 	MenuNavigation menu;
 	SecondMenuController menu2;
 	Shield shield;
+	Bow bow;
 
 	AudioSource myAudio;
 	Utils.ItemType myItem;
@@ -38,6 +40,7 @@ public class EquipedItem : MonoBehaviour {
 		menu2 = transform.Find ("StuffCanvas").GetComponent<SecondMenuController> ();
 
 		shield = transform.Find ("Shield").GetComponent<Shield> ();
+		bow = transform.Find ("BowItem").GetComponent<Bow> ();
 
 		myAudio = GetComponent<AudioSource> ();
 		InitCallBacks ();
@@ -120,32 +123,42 @@ public class EquipedItem : MonoBehaviour {
 	protected void OnBombs()
 	{
 		if (Input.GetButtonDown ("360_A"+id)) {
-			Movement.LookDirection dir = mov.getLooking();
-			Vector3 offset = new Vector3(0.0f,-0.50f,0.0f) ;;
-			Vector3 bombPosition = transform.position + offset; 
+			if(GeneralCanvasController.bombs <= 0) return;
+
+			--GeneralCanvasController.bombs;
+			Vector3 offset = transform.TransformPoint(GetComponent<OffsetPositionObject> ().getOffsetPosition ());
+			Vector3 bombPosition = offset; 
 			
 			GameObject item = (GameObject) Instantiate(Items.itemList[(int) myItem].prefab, bombPosition, transform.rotation);
-			item.GetComponent<Bomb>().InitBomb(transform);
 			item.transform.SetParent(transform.parent);
+			myAudio.Stop();
+			myAudio.clip = dropBomb;
+			myAudio.Play();
 		}
+	}
+
+	public void disableBow() {
+		bow.setBow (false);
 	}
 
 	protected void OnBow()
 	{
-		if (Input.GetButtonDown ("360_A"+id) && haveBoomerang) {
+		bow.setBow (true);
+
+		if (Input.GetButtonDown ("360_A"+id)) {
+			if(GeneralCanvasController.arrows <= 0) return;
+
+			--GeneralCanvasController.arrows;
 			Vector2 direction = mov.getWalkDirection();
 			Vector2 arrowDirection = Vector2.zero;
-			Vector3 arrowPosition = transform.position;
-			
+
 			if(direction.magnitude == 0) {
 				Movement.LookDirection dir = mov.getLooking();
 				if(dir == Movement.LookDirection.Up) {
 					arrowDirection = transform.up;
-					arrowPosition += transform.up*0.25f + transform.forward*0.25f;
 				}
 				if(dir == Movement.LookDirection.Down) {
 					arrowDirection = -transform.up;
-					arrowPosition += -transform.up*0.25f - transform.forward*0.25f;
 				}
 				if(dir == Movement.LookDirection.Left)
 					arrowDirection = -transform.right;
@@ -155,8 +168,8 @@ public class EquipedItem : MonoBehaviour {
 				arrowDirection = direction.normalized;
 			}
 			
-			GameObject item = (GameObject) Instantiate(Items.itemList[(int) myItem].prefab, arrowPosition, transform.rotation);
-			item.GetComponent<Bow>().InitArrow(transform,arrowDirection);
+			GameObject item = (GameObject) Instantiate(Items.itemList[(int) myItem].prefab, bow.transform.position, transform.rotation);
+			item.GetComponent<Arrow>().InitArrow(transform,arrowDirection);
 			item.transform.SetParent(transform.parent);
 		}
 	}

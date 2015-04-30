@@ -111,7 +111,7 @@ public class Items : MonoBehaviour {
 	}
 	protected void BowPreparation()
 	{
-		
+		player.GetComponent<EquipedItem> ().disableBow ();
 	}
 	protected void MirrorShieldPreparation()
 	{

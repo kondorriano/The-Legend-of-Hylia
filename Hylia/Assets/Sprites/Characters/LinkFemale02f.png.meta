@@ -1,0 +1,374 @@
+fileFormatVersion: 2
+guid: 11f371b1dc2eff6428f9b413b27f43e3
+timeCreated: 1430424292
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: LinkFemale02f_0
+    21300002: LinkFemale02f_1
+    21300004: LinkFemale02f_2
+    21300006: LinkFemale02f_3
+    21300008: LinkFemale02f_4
+    21300010: LinkFemale02f_5
+    21300012: LinkFemale02f_6
+    21300014: LinkFemale02f_7
+    21300016: LinkFemale02f_8
+    21300018: LinkFemale02f_9
+    21300020: LinkFemale02f_10
+    21300022: LinkFemale02f_11
+    21300024: LinkFemale02f_12
+    21300026: LinkFemale02f_13
+    21300028: LinkFemale02f_14
+    21300030: LinkFemale02f_15
+    21300032: LinkFemale02f_16
+    21300034: LinkFemale02f_17
+    21300036: LinkFemale02f_18
+    21300038: LinkFemale02f_19
+    21300040: LinkFemale02f_20
+    21300042: LinkFemale02f_21
+    21300044: LinkFemale02f_22
+    21300046: LinkFemale02f_23
+    21300048: LinkFemale02f_24
+    21300050: LinkFemale02f_25
+    21300052: LinkFemale02f_26
+    21300054: LinkFemale02f_27
+    21300056: LinkFemale02f_28
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -2
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: LinkFemale02f_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 248
+        width: 17
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 248
+        width: 18
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_2
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 248
+        width: 16
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_3
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 248
+        width: 18
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_4
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 248
+        width: 18
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_5
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 248
+        width: 16
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_6
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 248
+        width: 18
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_7
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 209
+        width: 16
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_8
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 209
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_9
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 209
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_10
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 209
+        width: 18
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_11
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 209
+        width: 18
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_12
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 209
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_13
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 209
+        width: 18
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_14
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 170
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_15
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 170
+        width: 19
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_16
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 170
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_17
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 170
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_18
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 170
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_19
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 170
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_20
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 170
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_21
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 134
+        width: 29
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_22
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 134
+        width: 25
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_23
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 134
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_24
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 134
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_25
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 134
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_26
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 134
+        width: 19
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_27
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 134
+        width: 20
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: LinkFemale02f_28
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 111
+        width: 32
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

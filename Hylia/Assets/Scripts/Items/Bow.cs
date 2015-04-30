@@ -1,59 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 public class Bow : MonoBehaviour {
 
-	private SpriteRenderer spriteRenderer;
+	public float distance = 0.75f;
 
-	public float distance  = 35;
-	public float speed = 10;
+	private int id;
+	SpriteRenderer mySprite;
 
-	public Sprite halfArrow;
-
-	//float counter = 0f;
-	Vector2 startPosition;
-	Vector2 endPosition = Vector3.zero;
-	Transform myPlayer;
-	Rigidbody2D myRigidbody;
-	float timer = -20f;
-
+	
+	void setId(int myId) {
+		id = myId;
+	}
+	
 	// Use this for initialization
 	void Start () {
-		spriteRenderer = GetComponent<SpriteRenderer> ();
+		mySprite = GetComponent<SpriteRenderer> ();
+
+		mySprite.enabled = false;
+		
+		Vector2 bowPosition = new Vector2 (0, 1).normalized *distance;
+		transform.position = transform.parent.position + new Vector3 (bowPosition.x, bowPosition.y, bowPosition.y*0.1f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (((Vector2)transform.position - startPosition).sqrMagnitude > distance) {
-			destroyArrow();
-		}
-		if (timer > 0) {
-			timer -= Time.deltaTime;
-			if (timer <= 0) destroyArrow();
-		}
-	}
 
-	void OnTriggerEnter(Collider c) {
-		myRigidbody.velocity = new Vector2(0, 0);
-		spriteRenderer.sprite = halfArrow;
-		timer = 2f;
-	}
-
-	void destroyArrow() {
-		Destroy (gameObject);
-	}
-
-	public void InitArrow(Transform player, Vector2 dir) {
-		myPlayer = player;
-		startPosition = (Vector2)transform.position;
-		myRigidbody = GetComponent<Rigidbody2D> ();
-		endPosition = (Vector2)transform.position+dir*distance;
-
+		float xAxis = Input.GetAxis ("Horizontal"+id);
+		float yAxis = Input.GetAxis ("Vertical"+id);
+		if (Mathf.Abs (xAxis) < 0.15f) xAxis = 0;
+		if (Mathf.Abs (yAxis) < 0.15f) yAxis = 0;
+		
+		Vector2 bowPosition = new Vector2 (xAxis, yAxis).normalized *distance;
+		
+		if(bowPosition.magnitude > 0) transform.position = transform.parent.position + new Vector3 (bowPosition.x, bowPosition.y, bowPosition.y*0.1f);
+		Vector2 dir = ((Vector2)(transform.position - transform.parent.position)).normalized;
 		float angle = Mathf.Atan2 (dir.x, dir.y);
 		angle = angle / Mathf.PI * 180;
-
-		transform.eulerAngles = new Vector3(0, 0, -angle);
-		myRigidbody.velocity = dir * speed;
+		
+		transform.eulerAngles = new Vector3(0, 0, -angle + 90);
+	}
+	
+	public void setBow(bool active) {
+		mySprite.enabled = active;
 	}
 }
