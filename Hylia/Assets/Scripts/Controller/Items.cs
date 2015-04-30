@@ -115,7 +115,7 @@ public class Items : MonoBehaviour {
 	}
 	protected void MirrorShieldPreparation()
 	{
-		
+		player.GetComponent<EquipedItem> ().disableShield ();
 	}
 	protected void MoonPearlPreparation()
 	{

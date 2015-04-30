@@ -31,8 +31,7 @@ public class EnemyHit : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D c) {
 		Vector2 force;
-
-		if (c.gameObject.tag == "Player1" || c.gameObject.tag == "Player2") {
+		if (c.collider.gameObject.tag == "Player1" || c.collider.gameObject.tag == "Player2") {
 			if(hitReach == Utils.EnemyHitType.Foot || hitReach == Utils.EnemyHitType.Both) {
 				OffsetPositionObject oPO = c.transform.GetComponent<OffsetPositionObject>();
 				
@@ -65,7 +64,7 @@ public class EnemyHit : MonoBehaviour {
 	void OnCollisionStay2D(Collision2D c) {
 		Vector2 force;
 		
-		if (c.gameObject.tag == "Player1" || c.gameObject.tag == "Player2") {
+		if (c.collider.gameObject.tag == "Player1" || c.collider.gameObject.tag == "Player2") {
 			if(hitReach == Utils.EnemyHitType.Foot || hitReach == Utils.EnemyHitType.Both) {
 				OffsetPositionObject oPO = c.transform.GetComponent<OffsetPositionObject>();
 				

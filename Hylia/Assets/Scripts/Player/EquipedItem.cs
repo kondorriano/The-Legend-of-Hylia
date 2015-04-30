@@ -18,6 +18,7 @@ public class EquipedItem : MonoBehaviour {
 	Movement mov;
 	MenuNavigation menu;
 	SecondMenuController menu2;
+	Shield shield;
 
 	AudioSource myAudio;
 	Utils.ItemType myItem;
@@ -35,6 +36,8 @@ public class EquipedItem : MonoBehaviour {
 		mov = GetComponent<Movement> ();
 		menu = transform.Find ("Canvas").GetComponent<MenuNavigation> ();
 		menu2 = transform.Find ("StuffCanvas").GetComponent<SecondMenuController> ();
+
+		shield = transform.Find ("Shield").GetComponent<Shield> ();
 
 		myAudio = GetComponent<AudioSource> ();
 		InitCallBacks ();
@@ -132,9 +135,13 @@ public class EquipedItem : MonoBehaviour {
 		
 	}
 
+	public void disableShield() {
+		shield.setShield (false);
+	}
+
 	protected void OnMirrorShield()
 	{
-		
+		shield.setShield (true);
 	}
 
 	public bool getMoonMode() {
