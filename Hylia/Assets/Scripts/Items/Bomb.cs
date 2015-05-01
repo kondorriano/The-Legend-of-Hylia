@@ -14,8 +14,13 @@ public class Bomb : MonoBehaviour {
 	void Update () {
 		timer -= Time.deltaTime;
 		if (timer <= 0.0f){
-			Destroy (gameObject);
-			Instantiate(explosion, transform.position,Quaternion.identity);
+			transform.localScale = new Vector3(5,5,5);
+			GetComponent<Animator>().SetTrigger("Explode");
 		}
+	}
+
+	public void explode() {
+		Instantiate(explosion, transform.position,Quaternion.identity);
+		Destroy (gameObject);
 	}
 }
