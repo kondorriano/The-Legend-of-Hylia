@@ -197,9 +197,7 @@ public class EquipedItem : MonoBehaviour {
 			pearlCounter = pearlUseTime;
 
 			GetComponent<LightableObject> ().removeLightableObject ();
-			Color col = Color.black;
-			col.a = 0.5f;
-			GetComponent<SpriteRenderer>().color = col;
+
 			GetComponent<Movement>().setSpeed(1.6f);
 			myAudio.Stop();
 			myAudio.clip = activatePearl;
@@ -207,7 +205,6 @@ public class EquipedItem : MonoBehaviour {
 
 		} else {
 			GetComponent<LightableObject> ().addLightableObject ();
-			GetComponent<SpriteRenderer>().color = Color.white;
 			GetComponent<Movement>().setSpeed(1);
 			myAudio.Stop();
 			myAudio.clip = deactivatePearl;
@@ -266,16 +263,13 @@ public class EquipedItem : MonoBehaviour {
 			pearlCounter = pearlUseTime;
 
 			GetComponent<LightableObject> ().removeLightableObject ();
-			Color col = Color.yellow;
-			col.a = 0.5f;
-			GetComponent<SpriteRenderer>().color = col;
+
 			GetComponent<Movement>().setSpeed(1.6f);
 			myAudio.Stop();
 			myAudio.clip = activatePearl;
 			myAudio.Play();
 		} else {
 			GetComponent<LightableObject> ().addLightableObject ();
-			GetComponent<SpriteRenderer>().color = Color.white;
 			GetComponent<Movement>().setSpeed(1);
 			myAudio.Stop();
 			myAudio.clip = deactivatePearl;
