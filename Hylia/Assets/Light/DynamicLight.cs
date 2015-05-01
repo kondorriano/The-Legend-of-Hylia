@@ -91,6 +91,46 @@ public class DynamicLight : MonoBehaviour {
 
 	}
 
+	bool ContainsPoint (Vector2[] polyPoints, Vector2 p) { 
+		int j = polyPoints.Length-1; 
+		bool inside = false; 
+		for (int i = 0; i < polyPoints.Length; j = i++) { 
+			if ( ((polyPoints[i].y <= p.y && p.y < polyPoints[j].y) || (polyPoints[j].y <= p.y && p.y < polyPoints[i].y)) && 
+			    (p.x < (polyPoints[j].x - polyPoints[i].x) * (p.y - polyPoints[i].y) / (polyPoints[j].y - polyPoints[i].y) + polyPoints[i].x)) 
+				inside = !inside; 
+		} 
+		return inside; 
+	}
+
+	Vector2[] getPolygonPoints(Transform lightableObject) {
+		PolygonCollider2D mf = null;
+		BoxCollider2D bc = null;
+		Vector2[] polyPoints;
+
+		mf = lightableObject.GetComponent<PolygonCollider2D>();
+		if (mf != null) {
+			polyPoints = new Vector2[mf.GetTotalPointCount ()];
+			for (int i = 0; i < polyPoints.Length; i++) {		
+				polyPoints[i] = lightableObject.TransformPoint(mf.points[i]);
+			}
+
+			return polyPoints;
+		} else {
+			polyPoints = new Vector2[4];
+			bc = lightableObject.GetComponent<BoxCollider2D>();
+
+			polyPoints[0] = lightableObject.TransformPoint(new Vector2(bc.offset.x+bc.size.x*0.5f, bc.offset.y+bc.size.y*0.5f));
+			polyPoints[1] = lightableObject.TransformPoint(new Vector2(bc.offset.x+bc.size.x*0.5f, bc.offset.y-bc.size.y*0.5f));
+			polyPoints[2] = lightableObject.TransformPoint(new Vector2(bc.offset.x-bc.size.x*0.5f, bc.offset.y+bc.size.y*0.5f));
+			polyPoints[3] = lightableObject.TransformPoint(new Vector2(bc.offset.x-bc.size.x*0.5f, bc.offset.y-bc.size.y*0.5f));
+
+			return polyPoints;
+			
+		}
+
+
+	}
+
 	void setLight () {
 
 		bool sortAngles = false;
@@ -272,31 +312,38 @@ public class DynamicLight : MonoBehaviour {
 
 
 					if(isEndpoint == true){
+
 						Vector2 dir = (fromCast - (Vector2) transform.position);
 						fromCast += dir.normalized*0.1f;
-						
-						
-						
-						float mag = (lightRadius);//-dir.magnitude);// - fromCast.magnitude;
-						RaycastHit2D rayCont = Physics2D.Raycast(fromCast, dir.normalized, mag, lightableLayer);
-						//Debug.DrawLine(fromCast, dir.normalized*mag ,Color.green);
 
-						
-						Vector2 hitp;
-						if(rayCont){
-							if((rayCont.point-(Vector2)transform.position).magnitude >= lightRadius) hitp = transform.TransformPoint( dir.normalized * mag);
-							else hitp = rayCont.point;
-						}else{
-							hitp = transform.TransformPoint( dir.normalized * mag);
+						bool notInside = true;
+						for(int i = 0; i < LightController.lightableObjectsList.Count && notInside; ++i) {
+							notInside = !ContainsPoint(getPolygonPoints(LightController.lightableObjectsList[i]), fromCast);
 						}
 
-						Debug.DrawLine(new Vector3(fromCast.x,fromCast.y, transform.position.z), new Vector3(hitp.x,hitp.y, transform.position.z), Color.green);	
+						if(notInside) {	
+							
+							float mag = (lightRadius);//-dir.magnitude);// - fromCast.magnitude;
+							RaycastHit2D rayCont = Physics2D.Raycast(fromCast, dir.normalized, mag, lightableLayer);
+							//Debug.DrawLine(fromCast, dir.normalized*mag ,Color.green);
 
-						verts vL = new verts();
-						vL.pos = transform.InverseTransformPoint(hitp);
+							
+							Vector2 hitp;
+							if(rayCont){
+								if((rayCont.point-(Vector2)transform.position).magnitude >= lightRadius) hitp = transform.TransformPoint( dir.normalized * mag);
+								else hitp = rayCont.point;
+							}else{
+								hitp = transform.TransformPoint( dir.normalized * mag);
+							}
 
-						vL.angle = getVectorAngle(true,vL.pos.x, vL.pos.y);
-						allVertices.Add(vL);
+							Debug.DrawLine(new Vector3(fromCast.x,fromCast.y, transform.position.z), new Vector3(hitp.x,hitp.y, transform.position.z), Color.green);	
+
+							verts vL = new verts();
+							vL.pos = transform.InverseTransformPoint(hitp);
+
+							vL.angle = getVectorAngle(true,vL.pos.x, vL.pos.y);
+							allVertices.Add(vL);
+						}
 					}
 
 
