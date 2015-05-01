@@ -3,6 +3,10 @@ using System.Collections;
 
 public class Utils : MonoBehaviour {
 
+	public static Color moonColor = new Color (0, 0, 0, 0.5f);
+	public static Color sunColor = new Color(1,1,0,0.5f);
+	public static Color hurtColor = new Color(1,0,0,0.5f);
+
 	public enum ColliderType {
 		All = 0,
 		Boomerang = 1,
