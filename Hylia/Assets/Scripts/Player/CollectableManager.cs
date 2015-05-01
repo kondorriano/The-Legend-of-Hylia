@@ -19,6 +19,8 @@ public class CollectableManager : MonoBehaviour {
 
 	int quantity;
 	float magicCounter = 0;
+	float lifeCounter = 0;
+
 	// Use this for initialization
 	void Start () {
 		menu = transform.Find ("StuffCanvas").GetComponent<SecondMenuController> ();
@@ -104,9 +106,20 @@ public class CollectableManager : MonoBehaviour {
 		magicCounter = time;
 	}
 
+	public void addLifeThroughTime(int id, int itemQuantity, float time) {
+		if(lifeCounter > 0) return;
+		quantity = itemQuantity;		
+		AddHeart ();
+		lifeCounter = time;
+	}
+
 	void Update() {
 		if (magicCounter > 0) {
 			magicCounter -= Time.deltaTime;
+		}
+
+		if (lifeCounter > 0) {
+			lifeCounter -= Time.deltaTime;
 		}
 	}
 

@@ -48,6 +48,11 @@ public class Movement : MonoBehaviour {
 			return;
 		}
 
+		if (GetComponent<SwordAttack> ().getAttack ()) {
+			myRigidbody.velocity = Vector2.zero;
+			return;
+		}
+
 		bool up = false;
 		bool down = false;
 		bool right = false;
