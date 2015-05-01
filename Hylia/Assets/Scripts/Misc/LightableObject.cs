@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (PolygonCollider2D))]
+[RequireComponent (typeof (Collider2D))]
 public class LightableObject : MonoBehaviour {
 
 	bool active = true;

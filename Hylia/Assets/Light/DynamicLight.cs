@@ -22,7 +22,9 @@ public class DynamicLight : MonoBehaviour {
 
 	public List<verts> allVertices = new List<verts>();								// Array for all of the vertices in our meshes
 	public float lightRadius = 20f;
+	public Color lightColor = new Color (1f, 1f, 0.7f, 0.7f);
 	public int lightSegments = 8;
+
 
 	public LayerMask lightableLayer;
 
@@ -31,7 +33,8 @@ public class DynamicLight : MonoBehaviour {
 	
 	// Private variables
 	Mesh lightMesh;													// Mesh for our light mesh
-	
+	Renderer myRenderer;
+
 	// Called at beginning of script execution
 	void Start () {
 		transform.position = new Vector3 (transform.position.x, transform.position.y, LightController.lightPosition);
@@ -41,10 +44,13 @@ public class DynamicLight : MonoBehaviour {
 		//---------------------------------------------------------------------//
 
 		MeshFilter meshFilter = (MeshFilter)gameObject.AddComponent(typeof(MeshFilter));				// Add a Mesh Filter component to the light game object so it can take on a form
-		MeshRenderer renderer = gameObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;		// Add a Mesh Renderer component to the light game object so the form can become visible
+		myRenderer = gameObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;		// Add a Mesh Renderer component to the light game object so the form can become visible
 		//gameObject.name = "2DLight";
 		//renderer.material.shader = Shader.Find ("Transparent/Diffuse");							// Find the specified type of material shader
-		renderer.sharedMaterial = lightMaterial;														// Add this texture
+		//myRenderer.sharedMaterial = lightMaterial;	
+		myRenderer = GetComponent<Renderer> ();
+		myRenderer.material = lightMaterial;
+		// Add this texture
 		lightMesh = new Mesh();																	// create a new mesh for our light mesh
 		meshFilter.mesh = lightMesh;															// Set this newly created mesh to the mesh filter
 		lightMesh.name = "Light Mesh";															// Give it a name
@@ -57,6 +63,7 @@ public class DynamicLight : MonoBehaviour {
 	void Update(){
 
 		//getAllMeshes();
+		setShader ();
 		setLight ();
 		renderLightMesh ();
 		//resetBounds ();
@@ -74,6 +81,14 @@ public class DynamicLight : MonoBehaviour {
 		Bounds b = lightMesh.bounds;
 		b.center = Vector3.zero;
 		lightMesh.bounds = b;
+	}
+
+	void setShader() {
+		myRenderer.material.SetFloat ("_UVXScale", 1f / lightRadius);
+		myRenderer.material.SetFloat ("_UVYScale", 1f / lightRadius);
+		myRenderer.material.SetColor ("_Color", lightColor);
+
+
 	}
 
 	void setLight () {
@@ -99,8 +114,24 @@ public class DynamicLight : MonoBehaviour {
 
 		for (int m = 0; m < LightController.lightableObjectsList.Count; m++) {
 		//for (int m = 0; m < 1; m++) {
+			int count;
+
 			tempVerts.Clear();
-			PolygonCollider2D mf = LightController.lightableObjectsList[m].GetComponent<PolygonCollider2D>();
+			PolygonCollider2D mf = null;
+			BoxCollider2D bc = null;
+			Vector2[] bcPoints = new Vector2[4];;
+			mf = LightController.lightableObjectsList[m].GetComponent<PolygonCollider2D>();
+			if(mf != null) count = mf.GetTotalPointCount();
+			else {
+				bc = LightController.lightableObjectsList[m].GetComponent<BoxCollider2D>();
+				count = 4;
+
+				bcPoints[0] = new Vector2(bc.offset.x+bc.size.x*0.5f, bc.offset.y+bc.size.y*0.5f);
+				bcPoints[1] = new Vector2(bc.offset.x+bc.size.x*0.5f, bc.offset.y-bc.size.y*0.5f);
+				bcPoints[2] = new Vector2(bc.offset.x-bc.size.x*0.5f, bc.offset.y+bc.size.y*0.5f);
+				bcPoints[3] = new Vector2(bc.offset.x-bc.size.x*0.5f, bc.offset.y-bc.size.y*0.5f);
+
+			}
 
 			// las siguientes variables usadas para arregla bug de ordenamiento cuando
 			// los angulos calcuados se encuentran en cuadrantes mixtos (1 y 4)
@@ -108,12 +139,13 @@ public class DynamicLight : MonoBehaviour {
 			his = false; // check si hay mayores a 2.0
 
 
-
-			for (int i = 0; i < mf.GetTotalPointCount(); i++) {								   // ...and for ever vertex we have of each mesh filter...
+			for (int i = 0; i < count; i++) {								   // ...and for ever vertex we have of each mesh filter...
 				
 				verts v = new verts();
 				// Convert to world space
-				Vector2 worldPoint = mf.transform.TransformPoint(mf.points[i]);
+				Vector2 worldPoint;
+				if(mf != null)worldPoint = mf.transform.TransformPoint(mf.points[i]);
+				else worldPoint = bc.transform.TransformPoint(bcPoints[i]);
 
 
 				if((worldPoint-(Vector2) transform.position).magnitude <= lightRadius) {
@@ -423,7 +455,6 @@ public class DynamicLight : MonoBehaviour {
 		lightMesh.triangles = triangles;
 
 		//lightMesh.RecalculateNormals();
-		GetComponent<Renderer>().sharedMaterial = lightMaterial;
 		GetComponent<MeshCollider> ().sharedMesh = null;
 		GetComponent<MeshCollider> ().sharedMesh = lightMesh;
 	}

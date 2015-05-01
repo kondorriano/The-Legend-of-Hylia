@@ -49,6 +49,7 @@ Shader "Gradient/No Texture/Radial/Single-Color/To Transparent/Regular UV/Alpha 
 			uniform float _UVXScale;
 			uniform float _UVYScale;
 			uniform float _Offset;
+			uniform float _Intensity;
 		
 			//Data structure communication from Unity to the vertex shader
 			//Defines what inputs the vertex shader accepts
