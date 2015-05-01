@@ -44,8 +44,14 @@ public class ButtonPressUnPress : MonoBehaviour {
 	}
 
 	protected void activateStuff() {
-		if (myEvent.Length < 2)
+		if (myEvent.Length < 1)
 			return;
+		if (myEvent.Length == 1) {
+			if (myEvent[0] != null)
+				myEvent[0].performEvent ();
+			return;
+		}
+
 		if (active) {
 			if (myEvent[0] != null)
 				myEvent[0].performEvent ();

@@ -11,7 +11,7 @@ public class LightSinusRadius : MonoBehaviour {
 		originalRadius = dL.lightRadius;
 		randVal = new float[8];
 		for (int i = 0; i < randVal.Length; ++i) {
-			if(i%2 == 0) randVal[i] = Random.Range(0f,0.07f);
+			if(i%2 == 0) randVal[i] = Random.Range(0f,0.2f);
 			else randVal[i] = Random.Range(15f,20f);
 		}
 	}

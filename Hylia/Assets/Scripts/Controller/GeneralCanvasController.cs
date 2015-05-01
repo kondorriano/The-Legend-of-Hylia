@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class GeneralCanvasController : MonoBehaviour {
 
 	public static int rupees = 0;
-	public static int bombs = 3;
-	public static int arrows = 10;
+	public static int bombs = 15;
+	public static int arrows = 25;
 
 	Text rupeesText;
 	Text bombsText;
